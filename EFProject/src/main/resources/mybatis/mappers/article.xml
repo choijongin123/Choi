@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.article">
+
+	<resultMap id="articleResult" 				type="com.ezenfit.gm.vo.ArticleVO">
+		<result	property="ef_i_no"			column="ef_i_no"/>
+		<result	property="ef_i_title"			column="ef_i_title"/>
+		<result	property="ef_id"		column="ef_id"/>
+		<result	property="ef_writeDate"	column="ef_writeDate"/>
+		<result	property="ef_content"					column="ef_content"/>
+		<result	property="ef_imageFileName"		column="ef_imageFileName"/>	
+	</resultMap>
+	
+	<resultMap id="articleReplyResult" type="com.ezenfit.gm.vo.ArticleReplyVO">
+		<result	property="ef_i_no"			column="ef_i_no"/>
+		<result	property="ef_comment"	column="ef_comment"/>
+		<result	property="ef_r_content"		column="ef_r_content"/>
+		<result property="ef_r_date"	column="ef_r_date"/>
+		<result property="ef_id"						column="ef_id"/>
+	</resultMap>
+	
+	<!-- 문의하기 목록 페이지 불러오기 -->
+	<select id="inquiryList" parameterType="com.ezenfit.gm.vo.Criteria" resultMap="articleResult">
+		<![CDATA[
+		SELECT  ef_i_no,  
+		        ef_i_title, 
+		        ef_id,
+		        ef_writeDate       
+		 FROM ( 
+		        SELECT ef_i_no,  
+                       ef_i_title, 
+		               ef_id,
+                       ef_writeDate,  
+		               ROW_NUMBER() OVER(ORDER BY ef_i_no DESC) AS RNUM
+		         FROM  inquiry
+		                       ) MP
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY ef_i_no DESC
+		]]>
+	</select>
+	
+	<!-- 문의하기 리스트 카운트 -->
+	<select id="listCount" resultType="int">
+	<![CDATA[
+		SELECT COUNT(ef_i_no)
+		FROM inquiry
+		WHERE ef_i_no > 0
+	]]>
+	</select>
+	
+	<!-- 문의사항 작성하기  -->
+	<insert id="addInquiry" parameterType="com.ezenfit.gm.vo.ArticleVO">
+		<selectKey keyProperty="ef_i_no" resultType="java.lang.Integer" order="BEFORE">
+        	select ef_i_no_seq.NEXTVAL from dual
+    	</selectKey>
+		<![CDATA[
+		insert into inquiry (ef_i_no, ef_id, ef_i_title, ef_content, ef_imageFileName)
+		values (#{ef_i_no}, #{ef_id}, #{ef_i_title}, #{ef_content}, #{ef_imageFileName, jdbcType=VARCHAR})
+		]]>
+	</insert>
+	
+	<!-- 문의사항 게시글현황 페이지 불러오기 -->
+	<select id="inqSituation" parameterType="int" resultMap="articleResult">		
+		<![CDATA[
+		select *
+		from inquiry
+		where ef_i_no = #{ef_i_no}
+		]]>
+	</select>
+	
+	<!-- 답글 현황 리스트 불러오기 -->
+	<select id="replyList" parameterType="int" resultMap="articleReplyResult">
+		<![CDATA[
+		select ef_i_no, ef_comment, ef_id, ef_r_content, ef_r_date
+		from reply
+		where ef_i_no = #{ef_i_no}
+		order by ef_i_no DESC
+		]]>
+	</select>
+	
+	<!-- 문의사항 수정반영하기 -->
+	<update id="updateReflect" parameterType="com.ezenfit.gm.vo.ArticleVO">
+		<![CDATA[
+		update  inquiry
+		set  ef_i_title = #{ef_i_title}, 
+		ef_content = #{ef_content},
+		ef_imageFileName = #{ef_imageFileName, jdbcType=VARCHAR}
+		where ef_i_no = #{ef_i_no}				
+		]]>
+	</update>
+	
+	<!-- 문의사항 삭제하기 -->
+	<delete id="deleteInquiry" parameterType="com.ezenfit.gm.vo.ArticleVO">
+		<![CDATA[
+		delete from inquiry
+		where ef_i_no = #{ef_i_no}
+		]]>
+	</delete>
+	
+	<!-- 답글반영하기  -->
+	<insert id="addReply" parameterType="com.ezenfit.gm.vo.ArticleReplyVO">
+		<selectKey keyProperty="ef_comment" resultType="java.lang.Integer" order="BEFORE">
+        	select ef_comment_seq.NEXTVAL from dual
+    	</selectKey>
+		<![CDATA[
+		insert into reply (ef_i_no, ef_comment, ef_id, ef_r_content)
+		values (#{ef_i_no}, #{ef_comment}, #{ef_id}, #{ef_r_content})
+		]]>
+	</insert>
+	
+	<!-- 이미지 파일 명 imgInquiry ==> 안겹치게 하기 위해서 -->
+	<select id="imgContact" parameterType="String" resultType="int">
+		<![CDATA[
+		select count(*)
+		from   inquiry
+		where  ef_imageFileName = #{ef_imageFileName, jdbcType=VARCHAR}
+		]]>
+	</select>
+	
+	<!-- 답글 삭제하기 -->
+	<delete id="deleteReply" parameterType="com.ezenfit.gm.vo.ArticleReplyVO">
+		<![CDATA[
+		delete from reply
+		where ef_comment = #{ef_comment}
+		]]>
+	</delete>
+	
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+
+	<bean id="propertyPlaceholderConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<value>/WEB-INF/config/jdbc/jdbc.properties</value>
+		</property>	
+	</bean>
+
+	<bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
+		<property name="driver" 	value="${jdbc.driverClassName}"/>
+		<property name="url"		value="${jdbc.url}"/>
+		<property name="username"	value="${jdbc.username}"/>
+		<property name="password"	value="${jdbc.password}"/>
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" 		ref="dataSource"/>
+		<property name="configLocation"		value="classpath:mybatis/model/modelConfig.xml"/>
+		<property name="mapperLocations" 	value="classpath:mybatis/mappers/*.xml"/>
+	</bean>
+
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+
+	<!-- component-scan을 이용하여 해당 패키지를 스캔하게 된다. -->
+	<context:component-scan base-package="com.ezenfit.gm.vo"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.user"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.user.controller"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.user.service"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.user.dao"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.owner"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.owner.controller"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.owner.service"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.owner.dao"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.trainer"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.trainer.controller"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.trainer.service"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.trainer.dao"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.member"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.member.controller"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.member.service"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.member.dao"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.freeboard"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.freeboard.controller"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.freeboard.service"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.freeboard.dao"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.article"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.article.controller"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.article.service"></context:component-scan>
+	<context:component-scan base-package="com.ezenfit.gm.article.dao"></context:component-scan>
+</beans>
+
+
+
+
+
+
+

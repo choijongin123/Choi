@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.freeboard">
+
+	<resultMap id="freeBoardResult" 				type="com.ezenfit.gm.vo.FreeBoardVO">
+		<result	property="freeBoard_no"				column="freeBoard_no"/>
+		<result	property="freeBoard_notice"			column="freeBoard_notice"/>
+		<result	property="freeBoard_publicScope"	column="freeBoard_publicScope"/>
+		<result	property="freeBoard_title"			column="freeBoard_title"/>
+		<result	property="freeBoard_content"		column="freeBoard_content"/>
+		<result	property="freeBoard_imageFileName"	column="freeBoard_imageFileName"/>
+		<result	property="ef_id"					column="ef_id"/>
+		<result	property="freeBoard_writeDate"		column="freeBoard_writeDate"/>
+		<result	property="freeBoard_viewsCount"		column="freeBoard_viewsCount"/>
+		<result	property="freeBoard_commentCount"	column="freeBoard_commentCount"/>
+		<result	property="freeBoard_goodCount"		column="freeBoard_goodCount"/>
+		<result	property="freeBoard_badCount"		column="freeBoard_badCount"/>
+	</resultMap>
+	
+	<resultMap id="freeBoardCommentResult" 				type="com.ezenfit.gm.vo.FreeBoardCommentVO">
+		<result	property="freeBoard_commentNO"			column="freeBoard_commentNO"/>
+		<result property="freeBoard_commentLevel" 		column="freeBoard_commentLevel"/>
+		<result	property="freeBoard_commentPublicScope"	column="freeBoard_commentPublicScope"/>
+		<result	property="freeBoard_commentContent"		column="freeBoard_commentContent"/>
+		<result property="freeBoard_commentParentsNO"	column="freeBoard_commentParentsNO"/>
+		<result property="freeBoard_no"					column="freeBoard_no"/>
+		<result property="ef_id"						column="ef_id"/>
+		<result property="freeBoard_commentWriteDate"	column="freeBoard_commentWriteDate"/>
+	</resultMap>
+
+	<!-- 자유게시판(freeboard)리스트 가져오기 -->
+	<select id="freeBoardList" parameterType="com.ezenfit.gm.vo.Criteria" resultMap="freeBoardResult">
+		<![CDATA[
+		SELECT  freeBoard_no,  
+		        freeBoard_title, 
+		        ef_id,
+		        freeBoard_writeDate, 
+		        freeBoard_publicScope,
+		        freeBoard_commentCount
+		 FROM ( 
+		        SELECT freeBoard_no,  
+                       freeBoard_title, 
+		               ef_id,
+                       freeBoard_writeDate, 
+                       freeBoard_publicScope,
+                       freeBoard_commentCount,
+		               ROW_NUMBER() OVER(ORDER BY freeBoard_no DESC) AS RNUM
+		         FROM  freeBoard
+		                       ) MP
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY freeBoard_no DESC
+		]]>
+	</select>
+	
+	<!-- 자유게시판 리스트 카운트 -->
+	<select id="freeBoardCount" resultType="int">
+	<![CDATA[
+		SELECT COUNT(freeBoard_no)
+		  FROM freeBoard
+		 WHERE freeBoard_no > 0
+	]]>
+	</select>
+	
+	<!-- 게시글 추가하기 -->
+	<insert id="addPosts" parameterType="com.ezenfit.gm.vo.FreeBoardVO">
+	    <selectKey keyProperty="freeBoard_no" resultType="java.lang.Integer" order="BEFORE">
+        	select freeBoard_no_seq.NEXTVAL from dual
+    	</selectKey>
+
+		<![CDATA[
+		insert into freeBoard (freeBoard_no, freeBoard_notice, freeBoard_publicScope, freeBoard_title, freeBoard_content, 
+								freeBoard_imageFileName, ef_id)
+		values (#{freeBoard_no}, #{freeBoard_notice}, #{freeBoard_publicScope}, #{freeBoard_title}, #{freeBoard_content},
+		 		#{freeBoard_imageFileName, jdbcType=VARCHAR}, #{ef_id})
+		]]>
+	</insert>
+	
+	<!-- 게시글 보기 -->
+	<select id="freeBoardViewPosts" parameterType="int" resultMap="freeBoardResult">
+		<![CDATA[
+		select *
+		from   freeBoard
+		where  freeBoard_no=#{freeBoard_no}
+		]]>
+	</select>
+	
+	<!-- 댓글리스트 보기 -->
+	<select id="freeBoardViewCommentsList" parameterType="int" resultMap="freeBoardCommentResult">
+		<![CDATA[
+      	select *
+      	from   freeBoard_comment
+      	where  freeBoard_no=#{freeBoard_no}
+      	order by freeBoard_commentNO, freeBoard_commentWriteDate DESC
+      	]]>
+	</select>
+	
+	<!-- 수정하기 -->
+	<update id="modPosts" parameterType="com.ezenfit.gm.vo.FreeBoardVO">
+		<![CDATA[
+		update freeBoard
+		set    freeBoard_content = #{freeBoard_content},
+		       freeBoard_imageFileName = #{freeBoard_imageFileName, jdbcType=VARCHAR},
+		       freeBoard_publicScope = #{freeBoard_publicScope}
+		where  freeBoard_no = #{freeBoard_no}      
+		]]>
+	</update>
+	
+	<!-- 게시글 삭제하기 -->
+	<delete id="freeBoardDeletePosts" parameterType="int">
+		<![CDATA[
+		delete freeBoard
+		where  freeBoard_no = #{freeBoard_no}
+		]]>
+	</delete>
+	
+	<!-- 게시글 삭제시 댓글 삭제 -->
+	<delete id="commentDeletePosts" parameterType="int">
+		<![CDATA[
+		delete freeBoard_comment
+		where  freeBoard_no = #{freeBoard_no}
+		]]>
+	</delete>
+	
+	<!-- 댓글 추가하기 -->
+	<insert id="addComments" parameterType="com.ezenfit.gm.vo.FreeBoardCommentVO">	
+		<selectKey keyProperty="freeBoard_commentNO" resultType="java.lang.Integer" order="BEFORE">
+			select freeBoard_commentNO_seq.NEXTVAL from dual 
+		</selectKey>
+		
+		<![CDATA[
+		insert into freeBoard_comment (freeBoard_commentNO, freeBoard_commentContent, 
+		freeBoard_commentParentsNO, freeBoard_no, ef_id, freeBoard_commentLevel)
+		values (#{freeBoard_commentNO}, #{freeBoard_commentContent}, 
+		#{freeBoard_commentParentsNO}, #{freeBoard_no}, #{ef_id}, #{freeBoard_commentLevel})
+		]]>
+	</insert>
+	
+	<!-- 댓글 추가시 게시판 테이블 댓글 카운트 증가 -->
+	<update id="commentCount" parameterType="com.ezenfit.gm.vo.FreeBoardCommentVO">
+		<![CDATA[
+		update freeBoard
+		set    freeBoard_commentCount = freeBoard_commentCount + 1
+		where  freeBoard_no = #{freeBoard_no}
+		]]>
+	</update>
+	
+	<!-- 대댓글 추가시 댓글 테이블 대댓글 카운트 증가 -->
+	<update id="reCommentCount" parameterType="com.ezenfit.gm.vo.FreeBoardCommentVO">
+		<![CDATA[
+		update freeBoard_comment
+		set    freeBoard_reCommentCount = freeBoard_reCommentCount + 1
+		where  freeBoard_commentNO = #{freeBoard_commentParentsNO}
+		]]>
+	</update>
+	
+	<!-- 페이지 이동할 때 필요한 게시글 번호를 가여져오기 위함 -->
+	<select id="fbcvo" parameterType="int" resultType="com.ezenfit.gm.vo.FreeBoardCommentVO">
+		<![CDATA[
+		select *
+		from   freeBoard_comment
+		where  freeBoard_commentNO = #{freeBoard_commentNO}
+		]]>
+	</select>
+	
+	<!-- 댓글 삭제시 게시판 테이블 댓글 count 감소 -->
+	<update id="delCommentCount" parameterType="com.ezenfit.gm.vo.FreeBoardCommentVO">
+		<![CDATA[
+		update freeBoard
+		set    freeBoard_commentCount = freeBoard_commentCount - 1
+		where  freeBoard_no = #{freeBoard_no}
+		]]>
+	</update>
+	
+	<!-- 대댓글 삭제시 댓글 테이블 대댓글 count 감소 -->
+	<update id="delreCommentCount" parameterType="com.ezenfit.gm.vo.FreeBoardCommentVO">
+		<![CDATA[
+		update freeBoard_comment
+		set    freeBoard_reCommentCount = freeBoard_reCommentCount - 1
+		where  freeBoard_commentNO = #{freeBoard_commentParentsNO}
+		]]>
+	</update>
+	<!-- 댓글 삭제하기 -->
+	<delete id="deleteComments" parameterType="com.ezenfit.gm.vo.FreeBoardCommentVO">
+		<![CDATA[
+		delete from freeBoard_comment
+		where  freeBoard_commentNO = #{freeBoard_commentNO}
+		or     freeBoard_commentParentsNO = #{freeBoard_commentNO}
+		]]>
+	</delete>
+	
+	<!-- 답글리스트 보기 -->
+	<select id="replyList" parameterType="int" resultMap="freeBoardCommentResult">
+		<![CDATA[
+      	select freeBoard_commentNO, ef_id, freeBoard_commentContent, to_char(freeBoard_commentWriteDate, 'yyyy-mm-dd') as "freeBoard_commentWriteDate"
+      	from   freeBoard_comment
+      	where  freeBoard_commentParentsNO = #{freeBoard_commentParentsNO}
+      	order by freeBoard_commentNO, freeBoard_commentWriteDate DESC
+      	]]>
+	</select>
+	
+	
+	<!-- 이미지 파일명 중복 방지 count -->
+	<select id="imgCount" parameterType="String" resultType="int">
+		<![CDATA[
+		select count(*)
+		from   freeBoard
+		where  freeBoard_imageFileName = #{freeBoard_imageFileName}
+		]]>
+	</select>
+</mapper>

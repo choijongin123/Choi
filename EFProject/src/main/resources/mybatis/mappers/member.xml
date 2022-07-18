@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.member">
+
+	<resultMap id="regiResult" type="com.ezenfit.gm.vo.MemregiVO">
+		<result	property="ef_id"		column="ef_id"/>
+		<result	property="ef_count"			column="ef_count"/>
+		<result	property="ef_term"			column="ef_term"/>
+		<result	property="ef_start_term"	column="ef_start_term"/>
+		<result	property="ef_end_term"		column="ef_end_term"/>
+		<result	property="ef_p_type"		column="ef_p_type"/>
+	</resultMap>
+	
+	<resultMap id="ptResult" type="com.ezenfit.gm.vo.PtVO">
+		<result	property="ef_p_no"			column="ef_p_no"/>
+		<result	property="ef_id"			column="ef_id"/>
+		<result property="ef_name"			column="ef_name"/>
+		<result property="ef_c_name"		column="ef_c_name"/>
+		<result property="ef_p_type"		column="ef_p_type"/>
+		<result property="ef_p_date"		column="ef_p_date"/>
+		<result property="ef_p_time"		column="ef_p_time"/>
+		<result property="ef_p_personal"	column="ef_p_personal"/>
+		<result property="ef_r_personal"	column="ef_r_personal"/>
+	</resultMap>
+	
+	<resultMap id="reservationResult" type="com.ezenfit.gm.vo.ReservationVO">
+		<result	property="ef_p_no"			column="ef_p_no"/>
+		<result	property="ef_id"			column="ef_id"/>
+		<result property="ef_name"			column="ef_name"/>
+		<result property="ef_p_number"		column="ef_p_number"/>
+	</resultMap>
+		
+	<!-- pt정보 달력에 가져오기(회원 강의종류 ef_p_type) -->
+	<select id="memberRegi" parameterType="String" resultMap="regiResult">
+		<![CDATA[
+		select *
+		from   ef_m_regi
+		where  ef_id = #{ef_id}
+		]]>
+	</select>
+
+	 <!-- 예약한 pt리스트, 나의 예약 현황에 가져오기 -->
+	<select id="reservationPtlist" parameterType="com.ezenfit.gm.vo.ReservationVO" resultMap="ptResult">
+		<![CDATA[
+		select  pt.ef_p_no, pt.ef_p_type, pt.ef_name, pt.ef_p_date, pt.ef_p_time, pt.ef_p_personal, pt.ef_r_personal
+		from 	ef_pt pt
+		join 	reservation re
+		on   	pt.ef_p_no = re.ef_p_no
+		where 	re.ef_id = #{ef_id}
+		and    pt.ef_p_date >= sysdate-1
+		order by pt.ef_p_date, pt.ef_p_time			
+		]]>
+	</select> 
+		
+	<!-- pt정보 달력에 가져오기(회원) -->
+	<select id="findPt2" parameterType="com.ezenfit.gm.vo.PtVO" resultMap="ptResult">
+		<![CDATA[
+		select *
+		from   ef_pt
+		where  ef_c_name = #{ef_c_name}
+		and    ef_p_type = #{ef_p_type}
+		and    ef_p_date >= sysdate-1
+		order by ef_p_date, ef_p_time
+		]]>
+	</select>
+	
+	<!-- 중복 예약 방지 -->
+	<select id="countReservation" parameterType="com.ezenfit.gm.vo.ReservationVO" resultType="int">
+		<![CDATA[
+		select	count(*)
+		from	reservation
+		where	ef_p_no = #{ef_p_no}
+		and		ef_id = #{ef_id}
+		]]>	
+	</select>
+	
+	<!--  예약 카운트 (같은 날 같은 타임에 여러개 강의 예약 방지) -->
+	<select id="reservationCount" parameterType="com.ezenfit.gm.vo.PtreVO" resultType="int">
+		<![CDATA[
+		select	count(*)
+		from    (select *
+				 from   ef_pt pt, reservation re
+				 where  pt.ef_p_no = re.ef_p_no
+				 and    re.ef_id   = #{ef_id})
+		where    ef_p_date = #{ef_p_date}
+		and      ef_p_time = #{ef_p_time}		 
+		
+		]]>	
+	</select>
+	
+	<!-- 예약하기 -->
+	<insert id="insertReservation" parameterType="com.ezenfit.gm.vo.ReservationVO">
+		<![CDATA[
+		insert into reservation (ef_p_no, ef_id, ef_name, ef_p_number)
+		values (#{ef_p_no}, #{ef_id}, #{ef_name}, #{ef_p_number})
+		]]>	
+	</insert>
+	
+	<!-- 예약인원 1증가 -->
+	<update id="r_personalOnePlus" parameterType="com.ezenfit.gm.vo.ReservationVO">
+		<![CDATA[
+		update  ef_pt
+		set		ef_r_personal = ef_r_personal + 1
+		where	ef_p_no = #{ef_p_no}
+		and		ef_p_personal > ef_r_personal
+		]]>
+	</update>
+	
+	<!-- 참여가능횟수 1감소 -->
+	<update id="countOneMiuns" parameterType="com.ezenfit.gm.vo.ReservationVO">
+		<![CDATA[
+		update  ef_m_regi
+		set		ef_count = ef_count - 1
+		where	ef_id = #{ef_id}
+		and		ef_count > 0
+		]]>
+	</update>
+	
+	<!-- 예약 취소하기 -->
+	<delete id="deleteReservation" parameterType="com.ezenfit.gm.vo.ReservationVO">
+		<![CDATA[
+		delete from reservation
+		where ef_id = #{ef_id}
+		and ef_p_no = #{ef_p_no}
+		]]>
+	</delete>
+	
+	<!-- 예약인원 1감소 -->
+	<update id="r_personalOneMinus" parameterType="com.ezenfit.gm.vo.ReservationVO">
+		<![CDATA[
+		update  ef_pt
+		set		ef_r_personal = ef_r_personal - 1
+		where	ef_p_no = #{ef_p_no}
+		]]>
+	</update>
+	
+	<!-- 참여가능횟수 1증가 -->
+	<update id="countOnePlus" parameterType="com.ezenfit.gm.vo.ReservationVO">
+		<![CDATA[
+		update  ef_m_regi
+		set		ef_count = ef_count + 1
+		where	ef_id = #{ef_id}
+		]]>
+	</update>
+	
+
+
+</mapper>

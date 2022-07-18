@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+   <definition name="baseLayout"   template="/WEB-INF/views/common/layout.jsp">
+      <put-attribute    name="title"   value=""/>
+      <put-attribute    name="header"   value="/WEB-INF/views/common/header.jsp"/>
+      <put-attribute   name="body"      value=""/>
+      <put-attribute   name="footer"   value="/WEB-INF/views/common/footer.jsp"/>         
+   </definition>
+
+
+   <definition name="main" extends="baseLayout">
+      <put-attribute   name="title"   value="메인 페이지"/>
+      <put-attribute   name="body"      value="/WEB-INF/views/index.jsp"/>
+   </definition>
+  
+    <definition name="/companyProfile" extends="baseLayout">
+        <put-attribute name="title"  value="회사소개 페이지"/>
+        <put-attribute name="body"   value="/WEB-INF/views/companyProfile.jsp"/>
+  </definition>
+  
+  <definition name="/ProgramIntroduction" extends="baseLayout">
+        <put-attribute name="title"  value="프로그램 소개 페이지"/>
+        <put-attribute name="body"   value="/WEB-INF/views/ProgramIntroduction.jsp"/>
+  </definition>
+  
+  <definition name="/InformationUse" extends="baseLayout">
+        <put-attribute name="title"  value="이용안내 페이지"/>
+        <put-attribute name="body"   value="/WEB-INF/views/InformationUse.jsp"/>
+  </definition>  
+  
+   
+   <!-- user --> 
+   
+   <definition name="/user/myPage**" extends="baseLayout">
+        <put-attribute name="title"  value="로그인 페이지"/>
+        <put-attribute name="body"   value="/WEB-INF/views/user/myPage/{1}.jsp"/>
+    </definition>
+    <definition name="/user/signUp/**" extends="baseLayout">
+        <put-attribute name="title"  value="로그인 페이지"/>
+        <put-attribute name="body"   value="/WEB-INF/views/user/signUp/{1}.jsp"/>
+    </definition>
+    <definition name="/user/log" extends="baseLayout">
+        <put-attribute name="title"  value="로그인 페이지"/>
+        <put-attribute name="body"   value="/WEB-INF/views/user/log.jsp"/>
+    </definition>
+    
+
+   <!-- user end -->
+  
+  <!-- owner -->
+ 
+   <definition name="/owner/**" extends="baseLayout">
+        <put-attribute name="title"  value="관리자 페이지"/>
+        <put-attribute name="body"   value="/WEB-INF/views/owner/{1}.jsp"/>
+    </definition>
+    
+    
+	<!-- owner -->
+    
+	<!-- trainer -->
+     <definition name="/trainer/**" extends="baseLayout">
+        <put-attribute name="title"  value="강사 페이지"/>
+        <put-attribute name="body"   value="/WEB-INF/views/trainer/{1}.jsp"/>
+    </definition>
+	
+	<!-- trainer -->
+    
+    <!-- member -->
+    <definition name="/member/**" extends="baseLayout">
+        <put-attribute name="title"  value=""/>
+        <put-attribute name="body"   value="/WEB-INF/views/member/{1}.jsp"/>
+    </definition>
+    <!-- member -->
+
+	
+	<!-- freeboard -->
+	<definition name="/freeboard/**" extends="baseLayout">
+		<put-attribute name="title" value="자유게시판 입니다."/>
+		<put-attribute name="body" value="/WEB-INF/views/freeboard/{1}.jsp"/>
+	</definition>
+	<!--  freeboard -->
+	
+	<!-- article -->
+    <definition name="/article/inquiry" extends="baseLayout">
+        <put-attribute name="title"  value="문의목록 페이지"/>
+        <put-attribute name="body"   value="/WEB-INF/views/article/inquiry.jsp"/>
+    </definition>
+    
+    <definition name="/article/inqWrite" extends="baseLayout">
+        <put-attribute name="title"  value="문의사항 글 작성"/>
+        <put-attribute name="body"   value="/WEB-INF/views/article/inqWrite.jsp"/>
+    </definition>
+    
+    <definition name="/article/inqStatus" extends="baseLayout">
+        <put-attribute name="title"  value="문의하기 입니다."/>
+        <put-attribute name="body"   value="/WEB-INF/views/article/inqStatus.jsp"/>
+    </definition>
+    <!-- article -->
+	
+</tiles-definitions>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

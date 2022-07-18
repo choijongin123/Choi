@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.user">
+
+	<resultMap id="memResult" type="com.ezenfit.gm.vo.MemberVO">
+		<result	property="ef_id"		column="ef_id"/>
+		<result property="ef_pwd"		column="ef_pwd"/>
+		<result property="ef_name"		column="ef_name"/>
+		<result property="ef_p_number"	column="ef_p_number"/>
+		<result property="ef_email"		column="ef_email"/>
+		<result property="ef_c_name"	column="ef_c_name"/>
+		<result property="ef_class"		column="ef_class"/>
+		<result property="ef_date"		column="ef_date"/>
+	</resultMap>
+	
+	<resultMap id="cenResult" type="com.ezenfit.gm.vo.CenterVO">
+		<result	property="ef_c_name"	column="ef_c_name"/>
+	</resultMap>
+
+	<!-- 센터 리스트 -->
+	<select id="listCenter" resultMap="cenResult">
+		<![CDATA[
+		select * from ef_center
+		where  ef_c_class='11'
+		]]>
+	</select>
+	
+	<!-- 회원 가입 -->
+	<insert id="addUser" parameterType="com.ezenfit.gm.vo.MemberVO">
+		<![CDATA[
+		insert into ef_user (ef_id, ef_pwd, ef_name, ef_p_number, ef_email, ef_c_name, ef_class)
+		values (#{ef_id}, #{ef_pwd}, #{ef_name}, #{ef_p_number}, #{ef_email}, #{ef_c_name}, #{ef_class})
+		]]>
+	</insert>
+	
+		<!-- 센터 등록 -->
+	<insert id="addCenter" parameterType="com.ezenfit.gm.vo.CenterVO">
+		<![CDATA[
+		insert into ef_center (ef_c_name)
+		values (#{ef_c_name})
+		]]>
+	</insert>
+	
+	<!-- 입력한 업체명이 존재하는지 알아낸다. -->
+	<select id="checkCname" parameterType="com.ezenfit.gm.vo.CenterVO" resultType="int">
+		<![CDATA[
+		SELECT	COUNT(*)
+		FROM	ef_center
+		WHERE	ef_c_name = #{ef_c_name}
+		]]>
+	</select>
+	
+	<!-- 입력한 아이디가 존재하는지 알아낸다. -->
+	<select id="checkId" parameterType="com.ezenfit.gm.vo.MemberVO" resultType="int">
+		<![CDATA[
+		SELECT	COUNT(*)
+		FROM	ef_user
+		WHERE	ef_id = #{ef_id}
+		]]>
+	</select>
+	
+	<!-- 아이디 찾기  -->
+	<select id="findId" parameterType="com.ezenfit.gm.vo.MemberVO" resultType="com.ezenfit.gm.vo.MemberVO">
+		<![CDATA[
+		SELECT ef_id
+		FROM   ef_user
+		WHERE  ef_name = #{ef_name}
+		AND    ef_p_number = #{ef_p_number}
+		]]>
+	</select>
+	
+	<!-- 비밀번호 찾기  -->
+	<select id="findPwd" parameterType="com.ezenfit.gm.vo.MemberVO" resultType="com.ezenfit.gm.vo.MemberVO">
+		<![CDATA[
+		SELECT	ef_pwd
+		FROM	ef_user
+		WHERE	ef_p_number = #{ef_p_number}
+		AND	    ef_id = #{ef_id}
+		]]>
+	</select>
+	
+	<!-- 로그인 -->
+	<select id="login" parameterType="com.ezenfit.gm.vo.MemberVO" resultType="com.ezenfit.gm.vo.MemberVO">
+		<![CDATA[
+		SELECT	*
+		FROM	ef_user
+		WHERE	ef_id = #{ef_id}
+		AND	    ef_pwd = #{ef_pwd}
+		]]>
+	</select>
+	
+		<!-- 마이페이지 -->
+	<select id="myPage" parameterType="com.ezenfit.gm.vo.MemberVO" resultType="com.ezenfit.gm.vo.MemberVO">
+		<![CDATA[
+		select * 
+		from   ef_user
+		where  ef_id = #{ef_id}
+		and    ef_pwd = #{ef_pwd}
+		]]>
+	</select>
+	
+	<!-- 마이페이지 정보 수정하기 -->
+	<update id="updateInfo" parameterType="com.ezenfit.gm.vo.MemberVO">
+		<![CDATA[
+		update ef_user
+		set    
+			   ef_pwd = #{ef_pwd}, ef_name = #{ef_name}, 
+			   ef_p_number = #{ef_p_number}
+	    where  ef_id = #{ef_id}
+	    
+		]]>
+	</update>
+
+</mapper>
+
+
+
+

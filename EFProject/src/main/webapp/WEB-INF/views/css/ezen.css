@@ -1,0 +1,2306 @@
+@charset "UTF-8";
+/* ------------------------ 기본 폰트 옵션 ------------------------ */
+
+@font-face {								/* 폰트 페이스로 폴더 내 폰트 설정 : 구글 무료폰트 사용 */
+src: url("/css/font/Jua-Regular.ttf");		/* 폰트 URL */
+font-family: "Jua-Regular";					/* 사용할 폰트이름 명명 */
+}
+
+@font-face {								/* 상 동 */
+src: url("/css/font/DoHyeon-Regular.ttf");
+font-family:"DoHyeon-Regular";
+}
+
+/* ------------------------ 헤더 부분 최상단 메뉴 ------------------------ */
+
+.topMenuBtn{										/* 최상단 메뉴 텍스트 효과 */
+font-family: 				"Jua-Regular";			/* 폰트 불러오기 */
+font-size:					24px;					/* 글자크기 */
+color:						white;					/* 글자색상 */
+text-decoration:			none;					/* 글자효과 */
+text-shadow: 				2px 2px 3px silver;		/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */
+}
+
+.topMenuBtn:hover {									/* 최상단 메뉴 텍스트 호버 효과 */
+font-family: 				"Jua-Regular";
+font-size:					24px;
+color:						white;
+text-decoration:			none;
+text-shadow:				-1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000,	/*글자 테두리*/
+							2px 2px 7px #fff, 2px 2px  10px #fff, 2px 2px  21px #fff, 0 0 42px silver, 0 0 82px silver, 0 0 92px silver, 0 0 102px silver;	/* 네온효과 */
+}
+
+/* ------------------------ 기본 값 설정 옵션 ------------------------ */
+
+html{		/* 모든 HTML 문서에 적용할 스타일 */
+overflow-y:					scroll;	/* 스크롤바 항시 고정출력 - 가변길이에 따라 스크롤바가 나오고 안나오고 해서 화면 폭 비율이 깨지는 것을 방지하기 위해 항시 노출 */
+}
+
+#container{			/* 레이아웃.jsp 파일에서 모든 영역을 돋보이게 하기 위한 효과로 모든 범위에 부여 */
+border:						10px solid silver;	/* 테두리 두께, 종류, 색상 */
+width:						1500px;					/* 테두리의 너비 설정 */
+text-align:					center;					/* 내부 컨텐츠 정렬방식 */
+margin:						10px auto 10px auto;	/* 외부 여백 상, 좌, 하, 우   순서- */	
+padding:					10px 10px 10px 10px;	/* 내부 여백 */
+background: 				black;				/* 배경색 */
+border-radius: 				50px;					/* 모서리 깎기 효과 */
+box-shadow: 				0 0 20px 5px black;	/* 외곽 그림자 효과 */
+}
+
+#content{			/* 컨텐츠 필드 기본값 설정 */
+text-align:					center;
+margin:						10px auto 10px auto;		/* 상, 좌, 하, 우   순서- */	
+padding:					10px 0 10px 0;
+background: 				black;
+color:						white;
+min-height:					650px;	/* 최소높이 고정값을 줘서 화면비 유지 */
+}
+
+body {				/* 모든 바디영역에 대한 기본값 설정 */
+text-align:					center;
+background: 				gray;
+/*background-image: 			url("/resources/images/backImg2.png");
+background-repeat: 			repeat;*/
+}
+
+/* 화면 전체 공통 필드 설정 */
+.Field{			/* 컨테이너 내부에 실질적으로 페이지를 출력할 필드 구역 설정 (스케치북 역할)*/
+width:						86%;		/* 너비 */
+min-height:					500px;		/* 최소 높이 */
+background:					gray;		/* 배경색 */
+border:						10px solid silver;	/* 테두리 */
+box-shadow: 				0 0 20px 5px black inset;	/* 그림자 */
+text-align:					center;					/* 글자정렬방법 */
+padding:					30px 10px 10px 10px;	/* 외부여백 */
+margin:						10px auto 10px auto;	/* 내부여백 */
+border-radius: 				30px;					/* 모서리 둥글게 깎기 */
+}
+
+/* ------------------------ 상단 로고, 메뉴, 로그인필드 배치를 위한 테이블 ------------------------ */
+
+table#topTable {						/* 테이블 옵션 */
+width:						1400px;		/* 테이블 가로 길이 */
+margin:						10px auto 10px auto;		/* 상, 좌, 하, 우   순서- */
+}
+table#topTable tr{						/* 테이블 행 옵션 */
+height:						80px;		/* 행 높이 고정값으로 부여 */ 
+vertical-align:		 		bottom;		/* 행 내부 개체 정렬방식 bottom=하단 */
+}
+table#topTable td{						/* 테이블 행 옵션 */
+min-width:					180px;		/* 행 높이 고정값으로 부여 */ 
+vertical-align:		 		bottom;		/* 행 내부 개체 정렬방식 bottom=하단 */
+}
+
+/* ------------------------ 메인화면(index) ------------------------ */
+/* 슬라이드쇼 컨테이너의 디자인 */
+.slideshow-container {
+max-width:                  1400px;
+position:                   relative;
+margin:                     20px auto 0 auto;
+}
+/* 이미지를 숨기는데 사용 */
+.mySlides {
+display:                    none;
+}
+/* 다음, 이전 버튼 */
+.prev{
+cursor:                     pointer;
+position:                   absolute;
+top:                        340px;
+width:                      30px;
+left:                       0;
+color:                      white;
+transition:                 0.6s ease;
+}
+.next {
+cursor:                     pointer;
+position:                   absolute;
+top:                        340px;
+width:                      30px;
+right:                      0;
+color:                      white;
+transition:                 0.6s ease;
+}
+/* "다음 버튼"을 오른쪽에 위치 */
+.next {
+right:                      0;
+border-radius:              3px 0 0 3px;
+}
+/* 마우스를 올리면 배경색을 변경 */
+.prev:hover, .next:hover {
+background-color:           rgba(0,0,0,0.8);
+}
+/* 하단의 점들 */
+.dot {
+cursor:                     pointer;
+height:                     15px;
+width:                      15px;
+margin:                     0 2px;
+background-color:           #bbb;
+border-radius:              50%;
+display:                    inline-block;
+transition:                 background-color 0.6s ease;
+}
+.active, .dot:hover {
+background-color:           #717171;
+}
+/* 페이드 효과 */
+.fade {
+-webkit-animation-name:     fade;
+-webkit-animation-duration: 1.5s;
+animation-name:             fade;
+animation-duration:         1.5s;
+}
+@-webkit-keyframes fade {
+from {opacity: .4} 
+to {opacity: 1}
+}
+@keyframes fade {
+from {opacity: .4} 
+to {opacity: 1}
+}
+
+/* ------------------------ 스크롤바 디자인 ------------------------ */
+
+body::-webkit-scrollbar {				/* body 내 모든 스크롤바에 대한 설정 */
+width:						12px;		/* 스크롤바의 가로 폭 조정 */
+}
+body::-webkit-scrollbar-thumb {			
+height: 					30%;		/* 스크롤바의 최소 높이 */
+border-radius: 				5px;		/* 스크롤바 외곽에 둥근 효과 주기 */
+background-image: 			linear-gradient(180deg, gray 0%, white 99%);		/* 스크롤바 색상에 그라디우스 효과 넣기 */
+}
+body::-webkit-scrollbar-track {
+background:					black;		/* 스크롤바 레일의 배경색상 지정 */
+}
+
+/* ------------------------ 기본 버튼 옵션 ------------------------ */
+
+.button {			/* 버튼 평시 옵션 */
+width: 						60px;		/* 버튼 폭 */
+height: 					20px;		/* 버튼 높이 */
+font-size: 					12px;		/* 버튼 내부 글자크기 */
+border-radius: 				5px;		/* 버튼 모서리 둥글게 깎기 */
+background: 				black;		/* 배경색상 */
+color: 						white;		/* 글자색상 */
+border : 					1px;		/* 테두리 두께 */
+margin-bottom:				10px;
+}
+.button:hover {		/* 버튼 호버 옵션 */
+color: 						black;		/* 글자색상 */
+background: 				lightgray;	/* 배경색상 */
+cursor : 					pointer;	/* 마우스오버시 마우스포인터 변경 */
+border : 					1px;		/* 테두리 두께 */
+}
+.button:active {	/* 버튼 클릭 옵션 */
+background: 				lightgray;		/* 배경색상 */
+transform: 					translateY(1px) translateX(1px);	/* 버튼 위치 조정 -> Y축 1px X축 1px -> 아래로 눌리는 느낌 */
+border :					1px;		/* 테두리 두께 */
+}
+
+/* ------------------------ 로그인 영역 설정 ------------------------ */
+
+/* 로그인필드 내 버튼 디자인(로그인 시, 로그인 성공 후 멤버별 기능 버튼) */
+.loginBtn, .memberBtn {			/* 버튼 옵션 */
+width: 						60px;		/* 버튼 폭 */
+height: 					20px;		/* 버튼 높이 */
+font-size: 					12px;		/* 버튼 내부 글자크기 */
+border-radius: 				5px;		/* 버튼 모서리 둥글게 깎기 */
+background: 				black;		/* 배경색상 */
+color: 						white;		/* 글자색상 */
+border : 					1px;		/* 테두리 두께 */
+}
+
+.loginBtn:hover, .memberBtn:hover {		/* 버튼 호버 옵션 */
+color: 						black;		/* 글자색상 */
+background: 				lightgray;	/* 배경색상 */
+cursor : 					pointer;	/* 마우스오버시 마우스포인터 변경 */
+border : 					1px;		/* 테두리 두께 */
+}
+.loginBtn:active, .memberBtn:active {	/* 버튼 클릭 옵션 */
+background: 				lightgray;		/* 배경색상 */
+transform: 					translateY(1px) translateX(1px);	/* 버튼 위치 조정 -> Y축 1px X축 1px -> 아래로 눌리는 느낌 */
+border :					1px;		/* 테두리 두께 */
+}
+
+
+/* 로그인필드 내 버튼 디자인(로그인 시, 로그인 성공 후 멤버별 기능 버튼) */
+.memberBtn2 {			/* 버튼 옵션 */
+width: 						60px;		/* 버튼 폭 */
+height: 					20px;		/* 버튼 높이 */
+font-size: 					12px;		/* 버튼 내부 글자크기 */
+border-radius: 				5px;		/* 버튼 모서리 둥글게 깎기 */
+background: 				black;		/* 배경색상 */
+color: 						gold;		/* 글자색상 */
+border : 					1px;		/* 테두리 두께 */
+}
+
+.memberBtn2:hover {		/* 버튼 호버 옵션 */
+color: 						black;		/* 글자색상 */
+background: 				gold;	/* 배경색상 */
+cursor : 					pointer;	/* 마우스오버시 마우스포인터 변경 */
+border : 					1px;		/* 테두리 두께 */
+}
+.memberBtn2:active {	/* 버튼 클릭 옵션 */
+background: 				pink;		/* 배경색상 */
+transform: 					translateY(1px) translateX(1px);	/* 버튼 위치 조정 -> Y축 1px X축 1px -> 아래로 눌리는 느낌 */
+border :					1px;		/* 테두리 두께 */
+}
+
+/* 로그인필드 Div 디자인*/
+#loginField{				/* div 사이즈 고정을 주기위해 사용함 */
+height:						66px;	/* 영역 높이 */
+width: 						240px;
+background-color: 			gray;	/* 영역 색상 */
+padding:					10px 10px 8px 10px;		/* 영역 안쪽 여백 설정 */
+border-radius: 				10px;		/* 영역 모서리 둥글게 깎기 */
+}
+
+/* 로그인필드 내 회원가입, 아이디/비밀번호 찾기 텍스트링크 디자인 */
+.linkText{		/* 링크 부여된 텍스트 기본 옵션 */
+color: 						white;	/* 글자색상 */
+text-decoration: 			none;	/* 글자꾸미기 -> none // 디폴트값은 밑줄 */
+font-size:					11px;	/* 글자크기 */
+text-shadow:				0px 0px 5px black;	/* 그림자 부여   "좌우이격" "높이이격" "퍼짐반경" "색상" 순 */
+}
+.linkText:hover{	/* 링크 부여된 텍스트 호버 옵션 (세부 옵션은 상동)*/
+color:						black;
+text-decoration: 			none;		
+font-size:					11px;
+text-shadow:				1px 1px 5px white;
+}
+
+/* 로그인필드 내 각 인풋란 주석 텍스트 디자인 */
+.loginText{		
+display:					inline-block;	/* SPAN 태그에 블록 속성을 줘야지만 높이 및 폭, 정렬값을 설정할 수 있음 */
+width:						50px;			/* 블록 폭 */
+height:						12px;			/* 블록 높이 */
+color:						white;			/* 블록 내 글자 색상 */
+font-size:					12px;			/* 블록 내 글자크기 */
+text-align:					right;			/* 블록 내 글자 정렬방법 */
+}
+
+/* 로그인필드 내 각 인풋란 디자인 */
+.loginInput{
+width:                      80px;           /* 인풋란 길이 */
+}
+
+
+/* 로그인 성공 시 멤버별 로그인 정보 표기 부분 */
+.loginInfoText{
+font-family: 				"Jua-Regular";
+color:						white;			/* 블록 내 글자 색상 */
+font-size:					16px;			/* 블록 내 글자크기 */
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.textColorGold{
+font-family: 				"Jua-Regular";
+color:						gold;			/* 블록 내 글자 색상 */
+font-size:					16px;			/* 블록 내 글자크기 */
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+/* 상단 메뉴 이미지 호버 기능 */
+.menuHover:hover{		/* 상단 메뉴에 이미지 호버 옵션 부여 */
+filter: 					brightness(1) invert(1); /* 필터링 효과 부여 : 빛 반전1 -> 그대로 0, 색상반전 1 -> 그대로 0*/
+}
+
+/* ------------------------ 푸터 영역 설정 ------------------------ */
+
+#footerText {			/* 푸터영역에 들어가는 글씨 설정 */
+font-size:					12px;
+text-align:					center;
+color: 						white;
+}
+
+/* ------------------------ 회사소개 페이지 ------------------------ */
+/* 타이틀 */
+.companyTitle{
+font-family: 				"Jua-Regular";
+font-size:					48px;			/* 블록 내 글자크기 */
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+text-align:					center;
+
+}
+/* 메인글 상 테이블 : companyTop */
+table.companyTop{			
+margin:						5px auto 20px auto;	/* 상하좌우 자동 정렬(중앙) */
+width:						80%;	/* 테이블 내부에서의 차지하는 너비 설정 */
+height:						500px;	/* 높이 고정 */
+background:					gray;	/* 배경색 */  
+border-spacing:				8px;	/* 각 칸 사이의 너비설정 */
+border-collapse: 			separate; /* 라인 옵션---상기 너비 설정을 위한 옵션부여 */ 
+border:						0;			/* 선 두께 */
+font-size:				    18px;
+}
+/* 상 테이블 타이틀 */
+table.companyTop th{
+text-align:                left;
+font-family: 			   "Jua-Regular";
+font-size:				   30px;
+color:                     gold;
+text-shadow: 			   2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;		/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */
+}
+/* 슬로건 */
+table.companyTop td.sub{
+text-align:                left;
+font-family: 			   "Jua-Regular";
+font-size:				   22px;
+color:                     orange;
+text-shadow: 			   2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+/* td 내용 */
+table.companyTop td{
+text-align:                left;
+font-family: 			   "Jua-Regular";
+font-size:				   22px;
+text-shadow: 			   2px 2px 3px black; 		/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */
+}
+/* 주요기능 중간 테이블 : companyMiddle */
+table.companyMiddle{			
+margin:						20px auto 0 auto;	/* 상하좌우 자동 정렬(중앙) */
+width:						80%;	/* 테이블 내부에서의 차지하는 너비 설정 */
+background:					gray;	/* 배경색 */   
+border-spacing:				10px;	/* 각 칸 사이의 너비설정 */
+border-collapse: 			separate; /* 라인 옵션---상기 너비 설정을 위한 옵션부여 */ 
+border:						0;			/* 선 두께 */
+background:					silver;
+border-radius: 				20px;
+box-shadow:					2px 2px 5px black;
+}	
+/* 중간 테이블 타이틀 */
+table.companyMiddle th{
+text-align:					left;
+font-family: 			   "Jua-Regular";
+font-size:				   30px;
+color:                     gold; 
+text-shadow: 			   2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;		/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */
+}
+/* td 내용 */
+table.companyMiddle td{
+text-align:					left;
+font-family: 			   "Jua-Regular";
+font-size:				   22px;
+text-shadow: 			   2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;		/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */
+}
+/* 키워드 하 테이블 : companyUnder */
+table.companyUnder{			
+margin:						50px auto 10px auto;	/* 상하좌우 자동 정렬(중앙) */
+width:						80%;	/* 테이블 내부에서의 차지하는 너비 설정 */
+height:						400px;	/* 높이 고정 */
+background:					gray;	/* 배경색 */   
+border-spacing:				8px;	/* 각 칸 사이의 너비설정 */
+border-collapse: 			separate; /* 라인 옵션---상기 너비 설정을 위한 옵션부여 */ 
+border:						0;			/* 선 두께 */
+}
+/* 하 테이블 타이틀 */
+table.companyUnder th{
+text-align:                center;
+font-family: 			  "Jua-Regular";
+font-size:				   30px;
+color:                     white;
+text-shadow: 			   2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;		/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */
+}
+
+.redColor{
+color:                     #ff5151;
+}
+
+.whiteColor{
+color:                     white;
+}
+/* 이미지 */
+.img2{     
+object-fit:				   cover;
+width:                     335px;
+height:					   335px;
+border-radius: 				20px;
+border:						5px dotted silver;
+}
+/* td 내용 */
+table.companyUnder td{
+text-align:                center;
+font-family: 			  "Jua-Regular";
+font-size:				   22px;
+text-shadow: 			   2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;		/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */
+}
+
+/* ------------------------ 회사소개 페이지 ------------------------ */
+/* 타이틀 */
+.ProgramTitle{
+font-family: 				"Jua-Regular";
+font-size:					45px;			/* 블록 내 글자크기 */
+text-shadow: 				2px 2px 3px black;
+text-align:					center;
+width:						90%;
+margin:						10px auto 5px auto;	
+}
+/* 메인글 상 테이블 : ProgramTop */
+table.ProgramTop{			
+margin:						5px auto 20px auto;	/* 상하좌우 자동 정렬(중앙) */
+width:						80%;	/* 테이블 내부에서의 차지하는 너비 설정 */
+background:					gray;	/* 배경색 */  
+border-spacing:				8px;	/* 각 칸 사이의 너비설정 */
+border-collapse: 			separate; /* 라인 옵션---상기 너비 설정을 위한 옵션부여 */ 
+border:						0;			/* 선 두께 */
+}
+/* 상 테이블 타이틀 */
+table.ProgramTop th{
+text-align:                left;
+font-family: 			  "Jua-Regular";
+font-size:				   30px;
+color:                     gold;
+text-shadow: 			   2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;		/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */
+}
+/* td 내용 */
+table.ProgramTop td{
+text-align:                left;
+font-family: 			  "Jua-Regular";
+font-size:				   22px;
+text-shadow: 			   2px 2px 3px black;		/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */
+}
+/* 달력소개 중간 테이블 : ProgramMiddle */
+table.ProgramMiddle{	
+margin:						5px auto 10px auto;	/* 상하좌우 자동 정렬(중앙) */
+width:						80%;	/* 테이블 내부에서의 차지하는 너비 설정 */
+height:						400px;	/* 높이 고정 */
+background:					gray;	/* 배경색 */   
+border-spacing:				8px;	/* 각 칸 사이의 너비설정 */
+border-collapse: 			separate; /* 라인 옵션---상기 너비 설정을 위한 옵션부여 */ 
+border:						0;			/* 선 두께 */
+}
+/* 중간 테이블 타이틀 */
+table.ProgramMiddle th{
+text-align:                left;
+font-family: 			  "Jua-Regular";
+font-size:				   30px;
+color:                     gold;
+text-shadow: 			   2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;		/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */
+}
+
+/* 이미지 */
+.img3{     
+width:                     500px;
+height:					   350px;
+border-radius:				20px;
+border:						5px dotted silver;
+}
+/* td 내용 */
+table.ProgramMiddle td{
+text-align:                center;
+font-family: 			   "Jua-Regular";
+font-size:				   22px;
+text-shadow: 			   2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;		/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */
+}
+/* 하 테이블 : ProgramUnder */
+table.ProgramUnder{			
+margin:						5px auto 20px auto;	/* 상하좌우 자동 정렬(중앙) */
+width:						80%;	/* 테이블 내부에서의 차지하는 너비 설정 */
+background:					gray;	/* 배경색 */  
+border-spacing:				8px;	/* 각 칸 사이의 너비설정 */
+border-collapse: 			separate; /* 라인 옵션---상기 너비 설정을 위한 옵션부여 */ 
+border:						0;			/* 선 두께 */
+}
+/* 하 테이블 타이틀 */
+table.ProgramUnder th{
+text-align:                left;
+font-family: 			  "Jua-Regular";
+font-size:				   30px;
+color:                     #ff9326;
+text-shadow: 			   2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;		/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */
+}
+/* td 내용 */
+table.ProgramUnder td{
+text-align:                left;
+font-family: 			  "Jua-Regular";
+font-size:				   22px;
+text-shadow: 			   2px 2px 3px black;		/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */
+}
+
+/* ------------------------ 이용안내 페이지------------------------ */
+/* 타이틀 */
+.InformationUseTitle{
+font-family: 				"Jua-Regular";
+font-size:					45px;			/* 블록 내 글자크기 */
+text-shadow: 				2px 2px 3px black;
+text-align:					center;
+width:						90%;
+margin:						10px auto 5px auto;	
+}
+/* 메인글 상 테이블 : InformationTop */
+table.InformationTop{			
+margin:						5px auto 20px auto;	/* 상하좌우 자동 정렬(중앙) */
+width:						80%;	/* 테이블 내부에서의 차지하는 너비 설정 */
+height:						250px;	/* 높이 고정 */
+background:					gray;	/* 배경색 */  
+border-spacing:				8px;	/* 각 칸 사이의 너비설정 */
+border-collapse: 			separate; /* 라인 옵션---상기 너비 설정을 위한 옵션부여 */ 
+border:						0;			/* 선 두께 */
+}
+table.InformationTop th{
+text-align:                center;
+font-family: 			  "Jua-Regular";
+font-size:				   30px;
+color:                     white;
+text-shadow: 			   2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;			/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */
+}
+table.InformationTop td{
+text-align:                center;
+font-family: 			  "Jua-Regular";
+font-size:				   22px;
+text-shadow: 			   2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;			/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */
+}
+/* 등급 중간 테이블 : InformationMiddle */
+table.InformationMiddle {			
+margin:						5px auto 20px auto;	/* 상하좌우 자동 정렬(중앙) */
+width:						80%;	/* 테이블 내부에서의 차지하는 너비 설정 */
+height:						250px;	/* 높이 고정 */
+background:					gray;	/* 배경색 */  
+border-spacing:				8px;	/* 각 칸 사이의 너비설정 */
+border-collapse: 			separate; /* 라인 옵션---상기 너비 설정을 위한 옵션부여 */ 
+border:						0;			/* 선 두께 */
+
+}
+table.InformationMiddle td{
+text-align:                center;
+font-family: 			  "Jua-Regular";
+font-size:				   22px;
+color:                     white;
+text-shadow: 			   2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;			/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */
+border:						5px dotted silver;
+width:						300px;	/* 테이블 내부에서의 차지하는 너비 설정 */
+height:						320px;	/* 테이블 내부에서의 차지하는 너비 설정 */
+background:					#e4e4e4;
+border-radius:				30px;
+}
+
+.valueText{
+font-family: 			  "Jua-Regular";
+font-size:				   30px;
+color:                     gold;
+text-shadow: 			   2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.price{
+font-family: 			  "Jua-Regular";
+font-size:				   30px;
+color:                     orange;
+text-shadow: 			   2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+/* 하 테이블 : InformationUnder */
+table.InformationUnder{			
+margin:						5px auto 20px auto;	/* 상하좌우 자동 정렬(중앙) */
+width:						50%;	/* 테이블 내부에서의 차지하는 너비 설정 */
+height:						100px;	/* 높이 고정 */
+background:					gray;	/* 배경색 */  
+border-spacing:				8px;	/* 각 칸 사이의 너비설정 */
+border-collapse: 			separate; /* 라인 옵션---상기 너비 설정을 위한 옵션부여 */ 
+border:						0;			/* 선 두께 */
+
+}
+table.InformationUnder td{
+text-align:                center;
+font-family: 			  "Jua-Regular";
+font-size:				   22px;
+color:                     white;
+text-shadow: 			   2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;		/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */
+}
+
+/* ------------------------ 로그인 실패 시 로그인 페이지------------------------ */
+/* 로그인 부분 필드 설정(공통 필드 아님) */
+#logmainField{
+width:						30%;		/* 너비 */
+min-height:					300px;		/* 최소 높이 */
+background:					solid silver;		/* 배경색 */
+border:						10px solid silver;	/* 테두리 */
+box-shadow: 				0 0 20px 5px black inset;	/* 그림자 */
+text-align:					center;					/* 글자정렬방법 */
+padding:					10px 10px 10px 10px;	/* 외부여백 */
+margin:						10px auto 10px auto;	/* 내부여백 */
+border-radius: 				30px;					/* 모서리 둥글게 깎기 */	
+}
+/* 화면 테이블 설정 */
+table.loginTable{			/* 마이페이지 내 정보가 출력되는 영역 테이블 */
+margin:						10px auto 10px auto;	/* 상하좌우 자동 정렬(중앙) */
+width:						30%;	/* 테이블 내부에서의 차지하는 너비 설정 */
+height:						500px;	/* 높이 고정 */
+background:					solid silver;	/* 배경색 */
+border-spacing:				0;	/* 각 칸 사이의 너비설정 */
+border-collapse: 			separate; /* 라인 옵션---상기 너비 설정을 위한 옵션부여 */
+border:						0;			/* 선 두께 */
+}
+
+/* 페이지 화면 input란 */
+#loginPageInput{
+font-family: 				"Jua-Regular";		/* 글씨체 */
+font-size:					14px;	            /* 글자크기 */
+text-align:					center; /* 글자정렬방법 */
+width:                      200px;  /* 인풋박스의 넓이 */
+height:                     20px;   /* 인풋박스의 높이 */
+}
+/* 버튼옵션 */
+.logBtn {			/* 버튼 평시 옵션 */
+width: 						70px;		/* 버튼 폭 */  
+height: 					25px;		/* 버튼 높이 */
+font-size: 					12px;		/* 버튼 내부 글자크기 */
+border-radius: 				5px;		/* 버튼 모서리 둥글게 깎기 */
+background: 				black;		/* 배경색상 */
+color: 						white;		/* 글자색상 */
+border : 					1px;		/* 테두리 두께 */
+}
+.logBtn:hover {		/* 버튼 호버 옵션 */
+color: 						black;		/* 글자색상 */
+background: 				lightgray;	/* 배경색상 */
+cursor : 					pointer;	/* 마우스오버시 마우스포인터 변경 */
+border : 					1px;		/* 테두리 두께 */
+}
+.logBtn:active {	/* 버튼 클릭 옵션 */
+background: 				lightgray;		/* 배경색상 */
+transform: 					translateY(1px) translateX(1px);	/* 버튼 위치 조정 -> Y축 1px X축 1px -> 아래로 눌리는 느낌 */
+border :					1px;		/* 테두리 두께 */
+}
+
+/* ------------------------ 아이디 비밀번호 찾기 페이지 ------------------------ */
+
+/* 화면 필드 설정 */
+.findView{			/* 컨테이너 내부에 실질적으로 페이지를 출력할 필드 구역 설정 (스케치북 역할)*/
+width:						470px;		/* 너비 */
+height:                     370px;	
+text-align:					center;					/* 글자정렬방법 */
+margin:						auto;
+}
+
+.slideImg{
+border-radius:				20px;
+width:						94%;
+}
+
+/* 타이틀 */
+.findField {
+font-family: 				"Jua-Regular";
+font-size:					35px;			/* 블록 내 글자크기 */
+color:						white;
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;	
+}
+/* 상/하로 입력창과 찾기결과 값 영역을 나눈 테이블 */
+table#idFindForm, table#pwFindForm{			
+margin:						10px auto 10px auto;	/* 상하좌우 자동 정렬(중앙) */
+width:						90%;	/* 테이블 내부에서의 차지하는 너비 설정 */
+border-spacing:				0;	/* 각 칸 사이의 너비설정 */
+border-collapse: 			separate; /* 라인 옵션---상기 너비 설정을 위한 옵션부여 */
+border:						0;			/* 선 두께 */
+font-family: 				"Jua-Regular";
+color:						white;
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+font-size:					22px;
+}
+/* 입력창 상테이블 */
+table#findFind{			
+margin:						10px auto 10px auto ;	/* 상하좌우 자동 정렬(중앙) */
+width:						100%;	/* 테이블 내부에서의 차지하는 너비 설정 */
+border-spacing:				20px;	/* 각 칸 사이의 너비설정 */
+border-collapse: 			separate; /* 라인 옵션---상기 너비 설정을 위한 옵션부여 */
+border:						0;			/* 선 두께 */
+}
+/* 주석텍스트 설정 */
+.findText{
+text-align:					center; /* 글자정렬방법 */
+font-size:					20px;	/* 글자크기 */
+font-family: 				"Jua-Regular";			/* 폰트 불러오기 */
+color:						white;					/* 글자색상 */
+text-decoration:			none;					/* 글자효과 */
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;		/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */
+}
+
+.radioText{
+text-align:					center; /* 글자정렬방법 */
+font-size:					14px;	/* 글자크기 */
+font-family: 				"Jua-Regular";			/* 폰트 불러오기 */
+color:						white;					/* 글자색상 */
+text-decoration:			none;					/* 글자효과 */
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;		/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */
+}
+
+.loginText{
+text-align:					center; /* 글자정렬방법 */
+font-size:					14px;	/* 글자크기 */
+font-family: 				"Jua-Regular";			/* 폰트 불러오기 */
+color:						white;					/* 글자색상 */
+text-decoration:			none;					/* 글자효과 */
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;		/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */
+}
+/* 인풋란 */
+.form-control {		
+font-family: 				"Jua-Regular";		/* 글씨체 */
+font-size:					20px;	            /* 글자크기 */
+width:                      250px;  /* 인풋박스의 넓이 */
+height:                     25px;   /* 인풋박스의 높이 */
+}
+/* 버튼 옵션 */
+.findBtn {			/* 버튼 평시 옵션 */
+width: 						50px;		/* 버튼 폭 */  
+height: 					22px;		/* 버튼 높이 */
+font-size: 					12px;		/* 버튼 내부 글자크기 */
+border-radius: 				5px;		/* 버튼 모서리 둥글게 깎기 */
+background: 				black;		/* 배경색상 */
+color: 						white;		/* 글자색상 */
+border : 					1px;		/* 테두리 두께 */
+}
+.findBtn:hover {		/* 버튼 호버 옵션 */
+color: 						black;		/* 글자색상 */
+background: 				lightgray;	/* 배경색상 */
+cursor : 					pointer;	/* 마우스오버시 마우스포인터 변경 */
+border : 					1px;		/* 테두리 두께 */
+}
+.findBtn:active {	/* 버튼 클릭 옵션 */
+background: 				lightgray;		/* 배경색상 */
+transform: 					translateY(1px) translateX(1px);	/* 버튼 위치 조정 -> Y축 1px X축 1px -> 아래로 눌리는 느낌 */
+border :					1px;		/* 테두리 두께 */
+}
+/* 스크롤바 설정 */
+body#noScroll::-webkit-scrollbar {				/* body 내 모든 스크롤바에 대한 설정 */
+width:						none;		/* 스크롤바의 가로 폭 조정 */
+height:	none;
+} 
+body#noScroll::-webkit-scrollbar-track {
+background:					gray;		/* 스크롤바 레일의 배경색상 지정 */
+}
+
+/* ------------------------ 회원가입/ 유형 선택 페이지  ------------------------ */
+
+/* 회원정보 수정 페이지 테이블 : joinTable */
+table#classTable{			/* 회원정보 수정 페이지 내 사진 버튼 출력되는 영역 테이블 */
+margin:						100px auto 10px auto;	/* 상하좌우 자동 정렬(중앙) */
+width:						90%;	/* 테이블 내부에서의 차지하는 너비 설정 */
+background:					gray;	/* 배경색 */
+border-spacing:				10px;	/* 각 칸 사이의 너비설정 */
+border-collapse: 			separate; /* 라인 옵션---상기 너비 설정을 위한 옵션부여 */
+border:						0;
+}
+/* 메인 타이틀 */
+.classTitle {
+font-family: 				"Jua-Regular";
+font-size:					35px;			/* 블록 내 글자크기 */
+text-shadow:				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+color:						white;
+}
+
+/* 이미지버튼 설정 */
+.imgBtn{
+background: 				gray;		/* 배경색상 */	
+border:                     gray;       /* 테두리 색상 */
+}
+.imgBtn:hover {		/* 버튼 호버 옵션 */
+background: 				none;	/* 배경색상 */
+cursor : 					pointer;	/* 마우스오버시 마우스포인터 변경 */
+border : 					1px;		/* 테두리 두께 */
+}
+.imgBtn:active {	/* 버튼 클릭 옵션 */
+background: 				none;		/* 배경색상 */
+transform: 					translateY(1px) translateX(1px);	/* 버튼 위치 조정 -> Y축 1px X축 1px -> 아래로 눌리는 느낌 */
+border :					1px;		/* 테두리 두께 */
+}
+/* 이미지 설정 */
+.img{		/* td에 대한 옵션 */
+width:                      350px;     /* 이미지 너비 설정*/ 
+height:                     350px;     /* 이미지 높이 설정*/
+border-radius: 				20px;					/* 모서리 둥글게 깎기 */
+}
+
+/* ------------------------ 회원가입 페이지(모든 ef_class 동일 / 단, 오너는 셀렉박스 적용x) ------------------------ */
+/* 페이지 타이틀 */
+.joinTitle{		
+font-family: 				"Jua-Regular";
+font-size:					48px;			/* 블록 내 글자크기 */
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+text-align:					center;
+}
+/* 좌우를 나누는 테이블 */
+
+table#center{
+width:						80%;	/* 좌우 테이블이 각각 차지하는 비율 */
+margin:						0 180px 0 auto;
+}
+table#center td{
+width:						50%;	/* 좌우 테이블이 각각 차지하는 비율 */
+}
+/* 좌측 회원가입 페이지 테이블 : joinTable */
+#joinTable{			/* 회원정보 수정 페이지 내 정보가 출력되는 영역 테이블 */
+font-family: 				"Jua-Regular";
+margin:						20px auto 10px auto;	/* 상하좌우 자동 정렬(중앙) */
+width:						95%;	/* 테이블 내부에서의 차지하는 너비 설정 */
+height:						550px;	/* 높이 고정 */
+background:					gray;	/* 배경색 */
+border-spacing:				10px;	/* 각 칸 사이의 너비설정 */
+border-collapse: 			separate; /* 라인 옵션---상기 너비 설정을 위한 옵션부여 */
+word-break:					break-all; 
+table-layout:				fixed;
+}
+#joinTable td{		/* td에 대한 옵션 */
+display: 					table-cell;    /* 셀칸 간 동일 간격 유지 */
+height:						30px;   
+color:						black;     
+word-break:					break-all; 
+table-layout:				fixed;
+}
+
+#joinTable td.leftSide{		/* td에 대한 옵션 */
+text-align:					right;
+}
+.joinText { 		/* 회원정보 수정 페이지 각기 주석 */
+font-family: 				"Jua-Regular";
+display:					inline-block;	/* SPAN 태그에 블록 속성을 줘야지만 높이 및 폭, 정렬값을 설정할 수 있음 */
+width:						200px;			/* 블록 폭 */
+height:						20px;			/* 블록 높이 */
+color:						white;			/* 블록 내 글자 색상 */
+font-size:					22px;			/* 블록 내 글자크기 */
+text-align:					right;			/* 블록 내 글자 정렬방법 */
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.joinText2 { 		/* 회원정보 수정 페이지 각기 주석 */
+font-family: 				"Jua-Regular";
+display:					inline-block;	/* SPAN 태그에 블록 속성을 줘야지만 높이 및 폭, 정렬값을 설정할 수 있음 */
+width:						200px;			/* 블록 폭 */
+height:						20px;			/* 블록 높이 */
+color:						white;			/* 블록 내 글자 색상 */
+font-size:					14px;			/* 블록 내 글자크기 */
+text-align:					right;			/* 블록 내 글자 정렬방법 */
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+#joinTable #cnChkMsg { 		/* 회원정보 수정 페이지 각기 주석 */
+font-family: 				"Jua-Regular";
+color:						white;			/* 블록 내 글자 색상 */
+font-size:					14px;			/* 블록 내 글자크기 */
+text-align:					center;			/* 블록 내 글자 정렬방법 */
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+#joinTable #idChkMsg { 		/* 회원정보 수정 페이지 각기 주석 */
+font-family: 				"Jua-Regular";
+color:						white;			/* 블록 내 글자 색상 */
+font-size:					14px;			/* 블록 내 글자크기 */
+text-align:					center;			/* 블록 내 글자 정렬방법 */
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.joinSelect {		/* select 박스 설정 */
+font-family: 				"Jua-Regular";
+font-size:					14px;	            /* 글자크기 */
+text-align:					center; /* 글자정렬방법 */
+width:                      200px;  /* 인풋박스의 넓이 */
+height:                     30px;   /* 인풋박스의 높이 */
+}
+.joinInput {		/* 회원가입 페이지 회원 정보를 불러온 결과 텍스트(인풋란) */
+font-family: 				"Jua-Regular";
+font-size:					14px;	            /* 글자크기 */
+text-align:					center; /* 글자정렬방법 */
+width:                      200px;  /* 인풋박스의 넓이 */
+height:                     20px;   /* 인풋박스의 높이 */
+color:						black;
+}
+
+
+/* 우측 양식 테이블 */
+table#termsTable{			/* 회원가입 페이지 약관동의가 출력되는 영역 테이블 */
+margin:						30px auto 10px auto;	/* 상하좌우 자동 정렬(중앙) */
+width:						95%;	/* 테이블 내부에서의 차지하는 너비 설정 */
+height:						520px;	/* 높이 고정 */
+background:					white;	/* 배경색 */
+border-spacing:				10px;	/* 각 칸 사이의 너비설정 */
+border-collapse: 			separate; /* 라인 옵션---상기 너비 설정을 위한 옵션부여 */
+border:						0;			/* 선 두께 */
+border-radius: 				20px;					/* 모서리 둥글게 깎기 */
+}
+table#termsTable th{
+font-family: 				"Jua-Regular";	/* 폰트설정 */
+color:						gray;			/* 블록 내 글자 색상 */
+font-size:					20px;			/* 블록 내 글자크기 */
+text-align:					center;			/* 블록 내 글자 정렬방법 */
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+/* 약관양식 tbody에 대한 스크롤 설정 */
+table#termsTable tbody {						/* 전체 테이블 tr기준 모든 열의 기본값 옵션부여 */
+background:					white;
+color:						black;				
+text-align:					left; /* 글자정렬방법 */
+display:					block;
+overflow:					auto;
+max-height:					450px;
+font-size:					11px;	            /* 글자크기 */
+font-weight:				1000;
+}
+
+table#termsTable ol {						/* 전체 테이블 tr기준 모든 열의 기본값 옵션부여 */
+background:					white;
+color:						black;				
+text-align:					left; /* 글자정렬방법 */
+font-size:					11px;	            /* 글자크기 */
+font-weight:				300;
+}
+table#termsTable tbody::-webkit-scrollbar {
+width:						10px;		/* 스크롤바의 가로 폭 조정 */	
+}
+table#termsTable tbody::-webkit-scrollbar-thumb{
+height: 					30%;		/* 스크롤바의 최소 높이 */
+border-radius: 				5px;		/* 스크롤바 외곽에 둥근 효과 주기 */
+background-image: 			linear-gradient(180deg, gray 0%, white 99%);		/* 스크롤바 색상에 그라디우스 효과 넣기 */	
+}
+table#termsTable tbody::-webkit-scrollbar-track {
+background:					white;		/* 스크롤바 레일의 배경색상 지정 */
+}
+/* 라디오 박스 글 중앙정렬 */
+#radio{
+text-align:                 center;    
+}
+
+/* 회원가입 시 조건 충족이 되지 않을 시 버튼 비활성화 */
+.memberBtn:disabled{
+	opacity:0.6;
+	cursor:not-allowed;
+}
+
+.memberBtn:hover:disabled {		/* 버튼 호버 옵션 */
+	opacity:0.6;
+	cursor:not-allowed;
+}
+
+.memberBtn:active:disabled {	/* 버튼 클릭 옵션 */
+	opacity:0.6;
+	cursor:not-allowed;
+}
+
+/* ------------------------ 마이페이지 설정 ------------------------ */
+
+/* 마이페이지 화면 전체 테이블 : myPageLayout */
+table#myPageLayout{						/* 마이페이지 로딩시 레이아웃 틀을 잡기위한 테이블 설정 */
+width:						80%;		/* 테이블 너비 고정값으로 */
+margin:						30px auto 10px auto;	/* 여백설정 */
+text-align:					center;		/* 텍스트 정렬방식 중앙 */
+}
+table#myPageLayout td{					/* 마이페이지 로딩시 좌, 우 테이블 너비 설정을 위한 스타일 */
+width:						50%;		/* 행 폭 고정값으로 부여 */ 
+}
+/* 마이페이지 정보출력 테이블 : myInfoTable */
+table#myInfoTable{			/* 마이페이지 내 정보가 출력되는 영역 테이블 */
+margin:						10px auto 20px auto;	/* 상하좌우 자동 정렬(중앙) */
+width:						50%;	/* 테이블 내부에서의 차지하는 너비 설정 */
+height:						450px;	/* 높이 고정 */
+background:					gray;	/* 배경색 */
+border-spacing:				0;	/* 각 칸 사이의 너비설정 */
+border-collapse: 			separate; /* 라인 옵션---상기 너비 설정을 위한 옵션부여 */
+border:						0;			/* 선 두께 */
+}
+table#myInfoTable td{		/* td에 대한 옵션 */
+font-family: 				"Jua-Regular";		/* 글씨체만 줌 */
+}
+table#myInfoTable th{		/* th에 대한 옵션 */
+font-size:					26px;				/* 글자크기 */
+font-family: 				"Jua-Regular";		/* 폰트설정 */
+text-shadow: 				2px 2px 3px black;	/* 폰트 그림자 */
+text-decoration: 			overline underline;	/* 폰트 윗선, 아랫선 그리기 */
+}
+.mypageResultText {		/* 마이페이지 내 정보를 불러온 결과 텍스트 */
+display:					inline-block;	/* SPAN 태그에 블록 속성을 줘야지만 높이 및 폭, 정렬값을 설정할 수 있음 */
+width:						200px;			/* 블록 폭 */
+height:						20px;			/* 블록 높이 */
+color:						white;		/* 블록 내 글자 색상 */
+font-size:					20px;			/* 블록 내 글자크기 */
+text-align:					left;			/* 블록 내 글자 정렬방법 */
+text-shadow: 				2px 2px 3px black,-1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+}
+.mypageText {			/* 마이페이지 내 각기 주석 */
+display:					inline-block;	/* SPAN 태그에 블록 속성을 줘야지만 높이 및 폭, 정렬값을 설정할 수 있음 */
+width:						200px;			/* 블록 폭 */
+height:						20px;			/* 블록 높이 */
+color:						silver;			/* 블록 내 글자 색상 */
+font-size:					20px;			/* 블록 내 글자크기 */
+text-align:					right;			/* 블록 내 글자 정렬방법 */
+text-shadow: 				2px 2px 3px black,-1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+}
+
+.mypageText2 {			/* 마이페이지 내 각기 주석 */
+display:					inline-block;	/* SPAN 태그에 블록 속성을 줘야지만 높이 및 폭, 정렬값을 설정할 수 있음 */
+width:						200px;			/* 블록 폭 */
+height:						20px;			/* 블록 높이 */
+color:						white;			/* 블록 내 글자 색상 */
+font-size:					20px;			/* 블록 내 글자크기 */
+text-align:					left;			/* 블록 내 글자 정렬방법 */
+text-shadow: 				2px 2px 3px black,-1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+}
+
+/* ------------------------ 마이페이지 수정버튼 => 회원정보 수정 페이지 설정 ------------------------ */
+
+/* 회원정보 수정 페이지 화면 전체 필드 설정(기본 값이랑 다름) */
+.upDateField{			/* 컨테이너 내부에 실질적으로 페이지를 출력할 필드 구역 설정 (스케치북 역할)*/
+width:						86%;		/* 너비 */
+min-height:					700px;		/* 최소 높이 */
+background:					gray;		/* 배경색 */
+border:						10px solid silver;	/* 테두리 */
+box-shadow: 				0 0 20px 5px black inset;	/* 그림자 */
+text-align:					center;					/* 글자정렬방법 */
+padding:					10px 10px 10px 10px;	/* 외부여백 */
+margin:						10px auto 10px auto;	/* 내부여백 */
+border-radius: 				30px;					/* 모서리 둥글게 깎기 */
+}
+/* 페이지 타이틀 */
+.upDateTitle{		
+font-family: 				"Jua-Regular";
+font-size:					35px;			/* 블록 내 글자크기 */
+text-shadow: 				2px 2px 3px black;
+text-align:					center;
+width:						90%;
+margin:						10px auto 20px auto;
+}
+/* 회원정보 수정 페이지 테이블 : upDateInfoTable */
+table#upDateInfoTable{			/* 마이페이지 내 정보가 출력되는 영역 테이블 */
+margin:						10px auto 20px auto;	/* 상하좌우 자동 정렬(중앙) */
+width:						50%;	/* 테이블 내부에서의 차지하는 너비 설정 */
+height:						450px;	/* 높이 고정 */
+background:					gray;	/* 배경색 */
+border-spacing:				30px;	/* 각 칸 사이의 너비설정 */
+border-collapse: 			separate; /* 라인 옵션---상기 너비 설정을 위한 옵션부여 */
+border:						0;			/* 선 두께 */
+}
+table#upDateInfoTable td{		/* td에 대한 옵션 */
+font-family: 				"Jua-Regular";		/* 글씨체만 줌 */
+}
+table#upDateInfoTable th{		/* th에 대한 옵션 */
+font-size:					26px;				/* 글자크기 */
+font-family: 				"Jua-Regular";		/* 폰트설정 */
+text-shadow: 				2px 2px 3px black;	/* 폰트 그림자 */
+text-decoration: 			overline underline;	/* 폰트 윗선, 아랫선 그리기 */
+padding:					30px 10px 10px 10px;	/* 외부여백 */
+}
+.modInput {		/* 회원정보 수정 페이지 회원 정보를 불러온 결과 텍스트(인풋란) */
+font-family: 				"Jua-Regular";		/* 글씨체 */
+font-size:					18px;	            /* 글자크기 */
+text-align:					left; /* 글자정렬방법 */
+width:                      150px;  /* 인풋박스의 넓이 */
+height:                     20px;   /* 인풋박스의 높이 */
+margin:						0 50px 0 0;	/* 상하좌우 자동 정렬(중앙) */
+}
+.modTaxt {			/* 회원정보 수정 페이지 각기 주석 */
+display:					inline-block;	/* SPAN 태그에 블록 속성을 줘야지만 높이 및 폭, 정렬값을 설정할 수 있음 */
+width:						200px;			/* 블록 폭 */
+height:						20px;			/* 블록 높이 */
+font-family: 				"Jua-Regular";	/* 폰트설정 */
+color:						white;			/* 블록 내 글자 색상 */
+font-size:					20px;			/* 블록 내 글자크기 */
+text-align:					center;			/* 블록 내 글자 정렬방법 */
+text-shadow: 				2px 2px 3px black,-1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+}
+.effText {          /* 회원정보 수정 페이지 비밀번호 유효성검사 결과  */
+display:					inline-block;
+width:						200px;			/* 블록 폭 */
+height:						20px;			/* 블록 높이 */
+font-family: 				"Jua-Regular";  /* 폰트설정 */
+font-size:					13px;			/* 블록 내 글자크기 */
+text-align:					center;			/* 블록 내 글자 정렬방법 */	
+}
+
+/* ------------------------ 오너페이지 인원관리 페이지 => 수강일 수정 페이지 설정 ------------------------ */
+
+/* 페이지 타이틀 */
+.alterTitle{		
+font-family: 				"Jua-Regular";
+font-size:					35px;			/* 블록 내 글자크기 */
+text-shadow: 				2px 2px 3px black;
+text-align:					center;
+width:						90%;
+margin:						10px auto 20px auto;
+}
+/* 테이블 설정 */
+table#host_alterTable{			/* 마이페이지 내 정보가 출력되는 영역 테이블 */
+margin:						20px auto 10px auto;	/* 상하좌우 자동 정렬(중앙) */
+width:						35%;	/* 테이블 내부에서의 차지하는 너비 설정 */
+height:						600px;	/* 높이 고정 */
+background:					gray;	/* 배경색 */
+border-spacing:				30px;	/* 각 칸 사이의 너비설정 */
+border-collapse: 			separate; /* 라인 옵션---상기 너비 설정을 위한 옵션부여 */
+border:						0;			/* 선 두께 */
+}
+table#host_alterTable th{	 /* td에 대한 옵션 */
+font-family: 				"Jua-Regular";		/* 글씨체 */
+font-size:					25px;	            /* 글자크기 */
+text-shadow: 				2px 2px 3px black;
+}
+table#host_alterTable td{    /* td에 대한 옵션(인풋란별 주석글) */
+font-family: 				"Jua-Regular";		/* 글씨체 */
+font-size:					20px;	            /* 글자크기 */
+}
+.alterInput{                 /* 인풋란에 대한 옵션 */
+font-family: 				"Jua-Regular";		/* 글씨체 */
+font-size:					18px;	            /* 글자크기 */
+text-align:					center; /* 글자정렬방법 */
+width:                      200px;  /* 인풋박스의 넓이 */
+height:                     20px;   /* 인풋박스의 높이 */	
+}
+/* 버튼은 공용 버튼 사용 */
+
+
+
+
+
+
+.ownerField{			/* 컨테이너 내부에 실질적으로 페이지를 출력할 필드 구역 설정 (스케치북 역할)*/
+width:						86%;		/* 상 동 */
+min-height:					400px;
+background:					gray;
+border:						10px solid silver;
+box-shadow: 				0 0 20px 5px black inset;
+text-align:					center;
+padding:					30px 10px 10px 10px;
+margin:						10px auto 10px auto;
+border-radius: 				30px;
+}
+
+.ownerTableTitle{		/* 오너 승인목록 타이틀의 제목부분 */
+font-family: 				"Jua-Regular";
+font-size:					18px;			/* 블록 내 글자크기 */
+text-shadow: 				2px 2px 3px black,-1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+text-align:					left;
+width:						90%;
+display:					inline-block;
+margin:						30px auto 10px auto;
+}
+
+.ownerTitle{			/* 오너 승인메뉴 제목부분 */
+margin:						30px auto 0 auto;		/* 상, 좌, 하, 우   순서- */
+display:					inline-block;	/* SPAN 태그에 블록 속성을 줘야지만 높이 및 폭, 정렬값을 설정할 수 있음 */
+width:						300px;			/* 블록 폭 */
+height:						30px;			/* 블록 높이 */
+font-family: 				"Jua-Regular";
+font-size:					24px;			/* 블록 내 글자크기 */
+text-shadow: 				2px 2px 3px black,-1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+text-align:					left;
+color:						#eeeeee;
+}
+
+
+
+table.ownerScTable {		/* 오너 승인 테이블 효과주기 */
+width:						90%;	
+margin:						auto;
+font-size:					12px;
+font-weight:				400;
+border-spacing:				0;
+border-collapse: 			separate;
+box-shadow: 				2px 2px 10px 3px black;
+}
+
+table.ownerScTable th {
+color:						white;
+font-size:					14px;
+font-weight:				900;
+height:						24px;
+border:						1px solid white;
+background:					black;
+}
+
+table.ownerScTable td {
+border:						1px solid white;
+}
+
+table.ownerScTable tr {						/* 전체 테이블 tr기준 모든 열의 기본값 옵션부여 */
+height:						16px;
+background:					gray;
+color:						white;
+text-shadow: 				1px 1px 2px black;
+}
+
+table.ownerScTable tr:nth-child(2n+0) {		/* tr기준 짝수열에 해당하는 경우 옵션부여 */
+height:						16px;
+background:					silver;
+color:						black;
+text-shadow: 				1px 1px 2px white;
+}
+
+.ownerMenuLinkText{							/* 테이블 내 링크가 걸린 텍스트의 효과 */
+display:					inline-block;
+width:						100px;			/* 블록 폭 */
+height:						30px;			/* 블록 높이 */
+font-family: 				"Jua-Regular";
+font-size:					24px;
+color:						gold;
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+text-decoration:			none;
+}
+
+.ownerMenuLinkText:hover {					/* 테이블 내 링크가 걸린 텍스트의 호버 효과 */
+font-family: 				"Jua-Regular";
+font-size:					24px;
+text-decoration:			underline;
+color:						gold;
+text-shadow:				-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black,
+							2px 2px 7px #fff, 2px 2px  10px #fff, 2px 2px  21px #fff, 0 0 10px gold, 0 0 20px gold, 0 0 30px gold, 0 0 60px gold;
+cursor : 					pointer;
+}
+
+.ownerMenuLinkText2{							/* 테이블 내 링크가 걸린 텍스트의 효과 */
+font-family: 				"Jua-Regular";
+font-size:					16px;
+color:						orange;
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+text-decoration:			none;
+}
+
+.ownerMenuLinkText2:hover {				/* 테이블 내 링크가 걸린 텍스트의 호버 효과 */
+color:						orange;
+text-shadow:				-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black,
+							2px 2px 7px #fff, 2px 2px  10px #fff, 2px 2px  21px gold, 0 0 10px gold, 0 0 20px gold, 0 0 30px gold, 0 0 60px gold;
+cursor : 					pointer;
+}
+
+
+.ownerMenuTile {
+font-family: 				"Jua-Regular";
+font-size:					24px;			/* 블록 내 글자크기 */
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+color:						#eeeeee;
+}
+
+.inTableLinkText{
+cursor : 					pointer;
+color:						skyblue;
+text-decoration:			none;
+text-shadow: 				1px 1px 2px black;
+font-weight:				600;
+}
+
+.inTableLinkText:hover {
+color:						blue;
+text-shadow: 				1px 1px 2px black;
+font-weight:				600;
+}
+
+table.ownerCalenderLayout {
+width:						98%;		/* 테이블 너비 고정값으로 */
+margin:						30px auto 10px auto;	/* 여백설정 */
+text-align:					center;		/* 텍스트 정렬방식 중앙 */
+vertical-align:		 		top;
+}
+
+table.ownerCalenderLayout td {
+width:						50%;
+vertical-align:		 		top;
+}
+
+table.calendarList {
+background:					black;
+color:						black;
+font-size:					12px;
+font-family: 				"Jua-Regular";
+box-shadow: 				2px 2px 10px 3px black;
+border-spacing:				2px;
+border-collapse: 			separate;
+border-radius: 				10px;
+word-break:					break-all; 
+table-layout:				fixed;
+}
+
+table.calendarList td:hover {		
+cursor : 					pointer;
+background:					#ffffc1;
+color:						red;
+text-shadow:				1px 1px 3px black;
+font-weight:				bold;
+}
+
+table.calendarList tr {
+background:					white;
+height:						100px;	
+}
+
+table.calendarList td {
+background:					white;
+width:						100px;	
+border-radius: 				5px;
+text-shadow: 				1px 1px 3px gray;
+font-size:					14px;
+}
+
+table.calendarList tr.calendarListTop {
+background:					black;
+height:						50px;
+color:						white;
+vertical-align:		 		middle;
+font-size:					16px;
+text-shadow: 				1px 1px 5px white;
+}
+
+table.calendarList td.calendarListTop {
+background:					black;
+height:						50px;
+color: 						white;
+vertical-align:		 		middle;
+font-size:					16px;
+text-shadow: 				-1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000,1px 1px 5px silver;
+}
+
+table.calendarList td.calendarListTop:hover {
+font-size:					17px;
+text-decoration:			overline underline;
+}
+
+table.calendarList tr.calendarDayText {
+height:						30px;
+font-size:					16px;
+vertical-align:		 		middle;
+color:						#5a5a5a;
+}
+
+table.calendarList td.calendarDayText {
+height:						30px;
+font-size:					16px;
+vertical-align:		 		middle;
+color:						#5a5a5a;
+background:					#d2d2d2;
+}
+
+
+
+
+table.ownerCalList {		/* 오너 승인 테이블 효과주기 */
+width:						94%;
+margin:						0 auto 0 36px;
+font-size:					12px;
+font-weight:				400;
+border-spacing:				0;
+border-collapse: 			separate;
+box-shadow: 				2px 2px 10px 3px black;
+}
+
+table.ownerCalList th {
+font-size:					14px;
+font-weight:				900;
+height:						24px;
+background:					black;
+width:						10%;
+}
+
+table.ownerCalList td {
+width:						10%;
+border:						1px solid white;
+}
+
+table.ownerCalList tr {						/* 전체 테이블 tr기준 모든 열의 기본값 옵션부여 */
+height:						16px;
+background:					gray;
+color:						white;
+text-shadow: 				1px 1px 2px black;
+}
+
+table.ownerCalList tr:nth-child(2n+0) {		/* tr기준 짝수열에 해당하는 경우 옵션부여 */
+height:						16px;
+background:					silver;
+color:						black;
+text-shadow: 				1px 1px 2px white;
+}
+
+table.ownerCalList2 {		/* 오너 승인 테이블 효과주기 */
+width:						94%;
+margin:						0 auto 0 36px;
+font-size:					12px;
+font-weight:				400;
+border-spacing:				0;
+border-collapse: 			separate;
+box-shadow: 				2px 2px 10px 3px black;
+}
+
+table.ownerCalList2 th {
+font-size:					14px;
+height:						24px;
+background:					black;
+width:						10%;
+color:						white;
+}
+
+table.ownerCalList2 td {
+width:						10%;
+border:						1px solid white;
+}
+
+table.ownerCalList2 tr {						/* 전체 테이블 tr기준 모든 열의 기본값 옵션부여 */
+height:						16px;
+background:					gray;
+color:						white;
+text-shadow: 				1px 1px 2px black;
+}
+
+table.ownerCalList2 tbody {						/* 전체 테이블 tr기준 모든 열의 기본값 옵션부여 */
+width:						100%;
+background:					gray;
+color:						white;
+text-shadow: 				1px 1px 2px black;
+display:					block;
+overflow:					auto;
+max-height:					572px;
+}
+
+table.ownerCalList2 thead {						/* 전체 테이블 tr기준 모든 열의 기본값 옵션부여 */
+display:					block;
+width:						100%;
+background:					black;
+}
+
+table.ownerCalList2 tbody::-webkit-scrollbar {				/* body 내 모든 스크롤바에 대한 설정 */
+width:						10px;		/* 스크롤바의 가로 폭 조정 */
+}
+table.ownerCalList2 tbody::-webkit-scrollbar-thumb {			
+height: 					30%;		/* 스크롤바의 최소 높이 */
+border-radius: 				5px;		/* 스크롤바 외곽에 둥근 효과 주기 */
+background-image: 			linear-gradient(180deg, gray 0%, white 99%);		/* 스크롤바 색상에 그라디우스 효과 넣기 */
+}
+table.ownerCalList2 tbody::-webkit-scrollbar-track {
+background:					black;		/* 스크롤바 레일의 배경색상 지정 */
+}
+
+table.ownerCalList2 tr:nth-child(2n+0) {		/* tr기준 짝수열에 해당하는 경우 옵션부여 */
+height:						16px;
+background:					silver;
+color:						black;
+text-shadow: 				1px 1px 2px white;
+}
+
+
+table.revMemList {		/* 오너 승인 테이블 효과주기 */
+width:						94%;
+margin:						0 auto 0 auto;
+font-size:					12px;
+font-weight:				400;
+border-spacing:				0;
+border-collapse: 			separate;
+box-shadow: 				2px 2px 10px 3px black;
+}
+
+table.revMemList th {
+font-size:					14px;
+height:						24px;
+background:					black;
+width:						10%;
+color:						white;
+text-shadow: 				-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+table.revMemList td {
+width:						10%;
+border:						1px solid white;
+}
+
+table.revMemList tr {						/* 전체 테이블 tr기준 모든 열의 기본값 옵션부여 */
+height:						16px;
+background:					gray;
+color:						white;
+text-shadow: 				1px 1px 2px black;
+}
+
+table.revMemList tbody {						/* 전체 테이블 tr기준 모든 열의 기본값 옵션부여 */
+width:						100%;
+background:					gray;
+color:						white;
+text-shadow: 				1px 1px 2px black;
+display:					block;
+overflow:					auto;
+max-height:					360px;
+}
+
+table.revMemList thead {						/* 전체 테이블 tr기준 모든 열의 기본값 옵션부여 */
+display:					block;
+width:						100%;
+background:					black;
+}
+
+table.revMemList tbody::-webkit-scrollbar {				/* body 내 모든 스크롤바에 대한 설정 */
+width:						10px;		/* 스크롤바의 가로 폭 조정 */
+}
+table.revMemList tbody::-webkit-scrollbar-thumb {			
+height: 					30%;		/* 스크롤바의 최소 높이 */
+border-radius: 				5px;		/* 스크롤바 외곽에 둥근 효과 주기 */
+background-image: 			linear-gradient(180deg, gray 0%, white 99%);		/* 스크롤바 색상에 그라디우스 효과 넣기 */
+}
+table.revMemList tbody::-webkit-scrollbar-track {
+background:					black;		/* 스크롤바 레일의 배경색상 지정 */
+}
+
+table.revMemList tr:nth-child(2n+0) {		/* tr기준 짝수열에 해당하는 경우 옵션부여 */
+height:						16px;
+background:					silver;
+color:						black;
+text-shadow: 				1px 1px 2px white;
+}
+
+
+.calenderTitle{
+font-family: 				"Jua-Regular";			/* 폰트 불러오기 */
+font-size:					20px;					/* 글자크기 */
+color:						white;					/* 글자색상 */
+text-decoration:			none;					/* 글자효과 */
+text-shadow: 				-1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000,2px 2px 3px black;		/* 글자 그림자 - x축, y축, 번짐범위, 번짐색상 */	
+}
+
+.calendarDayText{
+font-family: 				"Jua-Regular";			/* 폰트 불러오기 */
+font-size:					14px;					/* 글자크기 */
+}
+
+.calenderText{
+font-family: 				Geneva;			/* 폰트 불러오기 */
+font-size:					8px;					/* 글자크기 */
+}
+
+.calenderMoreText{
+font-family: 				Geneva;			/* 폰트 불러오기 */
+font-size:					11px;					/* 글자크기 */
+color:						skyblue;
+text-decoration:			none;
+text-shadow: 				1px 1px 2px black;
+font-weight:				bold;
+}
+
+.textShadow{
+text-shadow: 				-1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+}
+
+
+#nullData{
+margin:						300px auto 0 auto;
+font-family: 				"Jua-Regular";			/* 폰트 불러오기 */
+font-size:					20px;					/* 글자크기 */
+color:						#ff8000;
+text-shadow: 				-1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+}
+
+#overData{
+margin:						300px auto 0 auto;
+font-family: 				"Jua-Regular";			/* 폰트 불러오기 */
+font-size:					20px;					/* 글자크기 */
+color:						orange;
+text-shadow: 				-1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+}
+
+table.addClassTable {
+width:						300px;
+height:						200px;	
+margin:						0 auto 0 auto;
+word-break:					break-all; 
+table-layout:				fixed;	
+}
+
+table.addClassTable td{
+height:						22px;
+vertical-align:		 		middle;
+}
+
+table.addClassTable td.addClassLAlign{
+text-align:					left;
+vertical-align:		 		middle;
+}
+
+#addClassField {
+border:						1px solid white;
+font-family: 				"Jua-Regular";
+font-size:					14px;
+font-weight:				400;
+text-shadow: 				-1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+width:						360px;
+height:						200px;	
+margin:						0 auto 0 auto;
+padding:					20px 30px 50px 30px;
+vertical-align:		 		middle;
+position:					absolute;
+top:						486px;
+left:						428px;
+background:					black;
+box-shadow: 				2px 2px 10px 3px black,rgba(0,0,0,0.5) 0 0 0 9999px;
+border-radius: 				20px;
+opacity: 					0.86;
+z-index : 100;
+}
+
+.addClassText{
+font-family: 				"Jua-Regular";
+display:					inline-block;	/* SPAN 태그에 블록 속성을 줘야지만 높이 및 폭, 정렬값을 설정할 수 있음 */
+width:						120px;			/* 블록 폭 */
+height:						14px;			/* 블록 높이 */
+color:						white;			/* 블록 내 글자 색상 */
+font-size:					14px;			/* 블록 내 글자크기 */
+text-align:					right;			/* 블록 내 글자 정렬방법 */
+margin:						0 50px 0 0;
+}
+
+.addClassDayText{
+display:					inline-block;	/* SPAN 태그에 블록 속성을 줘야지만 높이 및 폭, 정렬값을 설정할 수 있음 */
+width:						120px;			/* 블록 폭 */
+height:						14px;			/* 블록 높이 */
+color:						gold;			/* 블록 내 글자 색상 */
+font-size:					14px;			/* 블록 내 글자크기 */
+text-align:					left;			/* 블록 내 글자 정렬방법 */
+}
+
+.classListField {
+border:						1px solid white;
+font-family: 				"Jua-Regular";
+font-size:					14px;
+font-weight:				400;
+text-shadow: 				-1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+width:						300px;
+height:						260px;	
+margin:						0 auto 0 auto;
+padding:					20px 10px 10px 10px;
+vertical-align:		 		middle;
+position:					absolute;
+top:						350px;
+left:						992px;
+background:					gray;
+box-shadow: 				2px 2px 10px 3px black,rgba(0,0,0,0.5) 0 0 0 9999px;
+border-radius: 				20px;
+opacity: 					0.9;
+z-index : 100;
+}
+
+.updatePtInput{
+width:                      120px;           /* 인풋란 길이 */
+background:					#ffebe1;
+}
+
+.updatePtInput2{
+width:                      120px;           /* 인풋란 길이 */
+background:					#cae4ff;
+}
+
+table.classListTable {
+width:						280px;
+height:						200px;	
+margin:						0 auto 0 auto;
+word-break:					break-all; 
+table-layout:				fixed;
+}
+
+table.classListTable td.ListTableFst{
+width:						80px;
+}
+
+.classListTableText{
+font-family: 				"Jua-Regular";
+display:					inline-block;	/* SPAN 태그에 블록 속성을 줘야지만 높이 및 폭, 정렬값을 설정할 수 있음 */
+width:						60px;			/* 블록 폭 */
+height:						14px;			/* 블록 높이 */
+color:						gray;			/* 블록 내 글자 색상 */
+font-size:					14px;			/* 블록 내 글자크기 */
+text-align:					right;			/* 블록 내 글자 정렬방법 */
+margin:						0 0 0 20px;
+}
+
+.classListTableText2{
+font-family: 				"Jua-Regular";
+display:					inline-block;	/* SPAN 태그에 블록 속성을 줘야지만 높이 및 폭, 정렬값을 설정할 수 있음 */
+width:						60px;			/* 블록 폭 */
+height:						14px;			/* 블록 높이 */
+color:						white;			/* 블록 내 글자 색상 */
+font-size:					14px;			/* 블록 내 글자크기 */
+text-align:					right;			/* 블록 내 글자 정렬방법 */
+margin:						0 0 0 20px;
+}
+
+
+.revMemListField {
+border:						1px solid white;
+font-family: 				"Jua-Regular";
+font-size:					14px;
+font-weight:				400;
+text-shadow: 				-1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+width:						300px;
+height:						500px;
+margin:						0 auto 0 auto;
+vertical-align:		 		middle;
+position:					absolute;
+top:						308px;
+left:						992px;
+background:					white;
+box-shadow: 				2px 2px 10px 3px black,rgba(0,0,0,0.5) 0 0 0 9999px;
+border-radius: 				20px;
+opacity: 					0.9;
+z-index : 					100;
+}
+
+table.revMemListTable {		/* 오너 승인 테이블 효과주기 */
+width:						94%;	
+margin:						0 auto 0 auto;
+font-size:					12px;
+font-weight:				400;
+border-spacing:				0;
+border-collapse: 			separate;
+box-shadow: 				2px 2px 10px 3px black;
+}
+
+table.revMemListTable th {
+font-size:					14px;
+height:						24px;
+background:					black;
+}
+
+
+.classModifyBtn{							/* 테이블 내 링크가 걸린 텍스트의 효과 */
+border:						none;
+font-family: 				"Jua-Regular";
+font-size:					16px;
+color:						orange;
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+text-decoration:			none;
+background:					none;
+}
+
+.classModifyBtn:hover {				/* 테이블 내 링크가 걸린 텍스트의 호버 효과 */
+text-shadow:				-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black,
+							2px 2px 7px #fff, 2px 2px  10px #fff, 2px 2px  21px gold, 0 0 10px gold, 0 0 20px gold, 0 0 30px gold, 0 0 60px gold;
+cursor : 					pointer;
+background:					none;
+}
+
+.okMem{
+color:						#00d700;
+text-decoration:			none;
+text-shadow: 				1px 1px 2px black;
+font-weight:				600;
+}
+
+.maxMem{
+color:						#9f0000;
+text-decoration:			none;
+text-shadow: 				1px 1px 2px black;
+font-weight:				600;
+}
+
+.minCnt{
+color:						white;
+text-decoration:			none;
+text-shadow: 				1px 1px 2px black;
+font-weight:				600;
+}
+
+.impactColor{
+color:						gold;
+text-shadow:				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+
+
+
+.boardField{
+min-height:					480px;
+width:						94%;
+margin:						0 auto 0 auto;
+}
+
+table.freeBoardTable{
+margin:						0 auto 0 auto;
+width:						80%;
+font-size:					12px;
+background:					black;
+border-radius:				5px 5px 0 0;
+}
+
+table.freeBoardTable td{
+height:						20px;
+}
+
+
+table.freeBoardTable th {
+font-family: 				"Jua-Regular";
+background:					black;
+font-size:					16px;
+color:						white;
+}
+
+table.freeBoardTable th.tableNo {
+width:						5%;
+}
+
+table.freeBoardTable th.tableTitle {
+width:						75%;
+}
+
+table.freeBoardTable th.tableName {
+width:						10%;
+}
+
+table.freeBoardTable th.tableDate {
+width:						10%;
+}
+
+table.freeBoardTable td.bimil {
+color:						white;
+text-decoration:			none;
+text-shadow: 				1px 1px 2px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+table.freeBoardTable td.bbsTitle {
+text-align:					left;
+padding-left:				10px;
+}
+
+.bimilTitle{
+color:						gray;
+}
+
+.boardLinkText{					/* tr기준 짝수열에 해당하는 경우 옵션부여 */
+background:					gray;
+color:						white;
+text-decoration:			none;
+text-shadow: 				1px 1px 2px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+background:					none;
+}
+
+.boardLinkText:hover{					/* tr기준 짝수열에 해당하는 경우 옵션부여 */
+text-decoration:			underline;
+color:						gold;
+text-shadow: 				1px 1px 2px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.boardLinkText2{					/* tr기준 짝수열에 해당하는 경우 옵션부여 */
+color:						gold;
+text-decoration:			none;
+text-shadow: 				1px 1px 2px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+background:					none;
+}
+
+
+table.freeBoardTable tr{		/* tr기준 짝수열에 해당하는 경우 옵션부여 */
+height:						16px;
+background:					gray;
+color:						white;
+text-shadow: 				1px 1px 2px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+table.freeBoardTable tr:hover{		/* tr기준 짝수열에 해당하는 경우 옵션부여 */
+background:					white;
+text-shadow: 				1px 1px 2px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+table.freeBoardTable tr:nth-child(2n+0) {		/* tr기준 짝수열에 해당하는 경우 옵션부여 */
+height:						16px;
+background:					#a5a5a5;
+color:						white;
+text-shadow: 				1px 1px 2px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+table.freeBoardTable tr:nth-child(2n+0):hover {		/* tr기준 짝수열에 해당하는 경우 옵션부여 */
+background:					white;
+text-shadow: 				1px 1px 2px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+
+.writePostTable{
+font-family: 				"Jua-Regular";
+margin:						30px auto 0 auto;
+width:						58%;
+font-size:					16px;
+word-break:					break-all; 
+table-layout:				fixed;
+text-align:					center;
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
+}
+
+.writePostTable td.title{
+text-align:					center;
+font-family: 				"Jua-Regular";
+width:						50px;
+font-size:					16px;
+background:					black;
+}
+
+.writePostTable td.side{
+text-align:					center;
+width:						150px;
+background:					none;
+}
+
+.writePostTable td{
+background:					white;
+}
+
+
+.bbsUpload { 
+font-family: 				"Jua-Regular";
+font-size:					16px;
+color:						orange;
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.bbsUpload:hover { 
+text-shadow:				-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black,
+							2px 2px 7px #fff, 2px 2px  10px #fff, 2px 2px  21px gold, 0 0 10px gold, 0 0 20px gold, 0 0 30px gold, 0 0 60px gold;
+cursor : 					pointer;
+}
+
+
+#preview{
+width:						140px; 
+height:						140px;
+border:						none;
+}
+
+.writeTitle{
+font-family:				gulimche;
+width:						480px;
+height:						18px;
+font-size:					12px;
+border:						none;
+resize: 					none;
+color:						black;
+}
+
+.writeContent{
+font-family:				gulimche;
+width:						98%;
+height:						400px;
+font-size:					12px;
+border:						none;
+resize: 					none;
+color:						black;
+background:					white;
+}
+
+
+.returnListBtn{							/* 테이블 내 링크가 걸린 텍스트의 효과 */
+border:						none;
+font-family: 				"Jua-Regular";
+font-size:					16px;
+color:						gold;
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+text-decoration:			none;
+background:					none;
+}
+
+.returnListBtn:hover {				/* 테이블 내 링크가 걸린 텍스트의 호버 효과 */
+text-shadow:				-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black,
+							2px 2px 7px #fff, 2px 2px  10px #fff, 2px 2px  21px gold, 0 0 10px gold, 0 0 20px gold, 0 0 30px gold, 0 0 60px gold;
+cursor : 					pointer;
+background:					none;
+}
+
+
+.boardViewTable{
+width:						70%;
+margin:						0 auto 0 auto;
+border-spacing:				2px;
+border-collapse: 			separate;
+word-break:					break-all; 
+table-layout:				fixed;
+}
+
+.boardViewTable td{
+width:						25%;
+background:					white;
+color:						black;
+text-align:					left;
+font-family:				gulimche;
+font-size:					12px;
+}
+
+.boardViewTable td.viewSide{
+width:						15%;
+background:					none;
+color:						white;
+text-align:					center;
+font-family: 				"Jua-Regular";
+font-size:					16px;
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+vertical-align:		 		top;	
+}
+.boardViewTable td.tableName{
+width:						10%;
+text-align:					center;
+font-family: 				"Jua-Regular";
+font-size:					16px;
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+background:					black;
+color:						white;
+}
+
+.boardViewTable td.bottomBtn{
+background:					none;
+color:						black;
+text-align:					center;
+height:						80px;
+}
+
+.viewContent{
+font-family:				gulimche;
+width:						98%;
+height:						400px;
+font-size:					12px;
+border:						none;
+resize: 					none;
+color:						black;
+}
+
+
+.pageCntNum{
+display:					inline-block;
+margin:						20px auto 0 auto;
+padding:					0;
+text-align: 				center;
+color:						white;
+text-decoration:			none;
+text-shadow: 				1px 1px 2px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+background:					none;
+}
+
+.pageCntNum li {
+list-style: none; 
+float: left; 
+padding: 6px;
+}
+
+.pageCntNum a {
+color:						white;
+text-decoration:			none;
+}
+
+.pageCntNum a:hover {
+color:						gold;
+text-shadow: 				1px 1px 2px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+
+.addPosts{							/* 테이블 내 링크가 걸린 텍스트의 효과 */
+font-family: 				"Jua-Regular";
+font-size:					16px;
+color:						orange;
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+text-decoration:			none;
+display:					inline-block;	/* SPAN 태그에 블록 속성을 줘야지만 높이 및 폭, 정렬값을 설정할 수 있음 */
+width:						75%;			/* 블록 폭 */
+text-align:					right;			/* 블록 내 글자 정렬방법 */
+}
+
+.addPosts:hover {					/* 테이블 내 링크가 걸린 텍스트의 호버 효과 */
+color:						orange;
+text-shadow:				-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black,
+							2px 2px 7px #fff, 2px 2px  10px #fff, 2px 2px  21px #fff, 0 0 10px gold, 0 0 20px gold, 0 0 30px gold, 0 0 60px gold;
+cursor : 					pointer;
+}
+
+.myWriteList{							/* 테이블 내 링크가 걸린 텍스트의 효과 */
+font-family: 				"Jua-Regular";
+font-size:					16px;
+color:						gold;
+text-shadow: 				2px 2px 3px black,-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+text-decoration:			none;
+}
+
+.myWriteList:hover {					/* 테이블 내 링크가 걸린 텍스트의 호버 효과 */
+color:						gold;
+text-shadow:				-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black,
+							2px 2px 7px #fff, 2px 2px  10px #fff, 2px 2px  21px #fff, 0 0 10px gold, 0 0 20px gold, 0 0 30px gold, 0 0 60px gold;
+cursor : 					pointer;
+}
+
+
+table.replyListTable{
+width:						70%;
+margin:						10px auto 0 auto;
+border-spacing:				2px;
+border-collapse: 			separate;
+font-size:					12px;
+background:					lightgray;
+border-radius: 				10px;		/* 버튼 모서리 둥글게 깎기 */
+color:						black;
+text-shadow: 				1px 1px 2px gray;
+}
+
+table.replyListTable th{
+border-bottom:				1px dashed gray;
+font-weight:				900;
+}
+
+table.replyListTable th.reName{
+width:						8%;
+}
+table.replyListTable th.reContent{
+width:						70%;
+}
+table.replyListTable th.reDate{
+width:						14%;
+}
+table.replyListTable th.delReply{
+width:						8%;
+}
+
+
+table.replyListTable td.reConLeft{
+text-align:					left;
+}
+
+
+.div_btn {			/* 버튼 옵션 */
+width: 						60px;		/* 버튼 폭 */
+height: 					20px;		/* 버튼 높이 */
+font-size: 					12px;		/* 버튼 내부 글자크기 */
+border-radius: 				5px;		/* 버튼 모서리 둥글게 깎기 */
+background: 				black;		/* 배경색상 */
+color: 						white;		/* 글자색상 */
+border : 					1px;		/* 테두리 두께 */
+}
+.div_btn:hover {		/* 버튼 호버 옵션 */
+color: 						black;		/* 글자색상 */
+background: 				lightgray;	/* 배경색상 */
+cursor : 					pointer;	/* 마우스오버시 마우스포인터 변경 */
+border : 					1px;		/* 테두리 두께 */
+}
+.div_btn:active {	/* 버튼 클릭 옵션 */
+background: 				lightgray;		/* 배경색상 */
+transform: 					translateY(1px) translateX(1px);	/* 버튼 위치 조정 -> Y축 1px X축 1px -> 아래로 눌리는 느낌 */
+border :					1px;		/* 테두리 두께 */
+}
+
+
+table.commentTable{
+width:						70%;
+margin:						0 auto 0 auto;
+font-size:					12px;
+}
+
+table.commentTable td.coment{
+width:						87%;
+}
+
+table.commentTable td.etc{
+width:						13%;
+}
+.comentContent{
+width:                      98%;           /* 인풋란 길이 */
+font-size:					12px;
+}
+
+
+.div_reBtn {			/* 버튼 옵션 */
+width: 						60px;		/* 버튼 폭 */
+height: 					20px;		/* 버튼 높이 */
+font-size: 					12px;		/* 버튼 내부 글자크기 */
+border-radius: 				5px;		/* 버튼 모서리 둥글게 깎기 */
+background: 				black;		/* 배경색상 */
+color: 						white;		/* 글자색상 */
+border : 					1px;		/* 테두리 두께 */
+}
+.div_reBtn:hover {		/* 버튼 호버 옵션 */
+color: 						black;		/* 글자색상 */
+background: 				gray;	/* 배경색상 */
+cursor : 					pointer;	/* 마우스오버시 마우스포인터 변경 */
+border : 					1px;		/* 테두리 두께 */
+}
+.div_reBtn:active {	/* 버튼 클릭 옵션 */
+background: 				gray;		/* 배경색상 */
+transform: 					translateY(1px) translateX(1px);	/* 버튼 위치 조정 -> Y축 1px X축 1px -> 아래로 눌리는 느낌 */
+border :					1px;		/* 테두리 두께 */
+}
+
+
+
+
+table.reReplyListTable{
+width:						94%;
+margin:						10px 10px 0 auto;
+border-spacing:				2px;
+border-collapse: 			separate;
+font-size:					12px;
+background:					white;
+border-radius: 				10px;		/* 버튼 모서리 둥글게 깎기 */
+color:						black;
+text-shadow: 				1px 1px 2px gray;
+}
+
+table.reReplyListTable th{
+border-bottom:				1px solid gray;
+font-weight:				900;
+}
+
+table.reReplyListTable th.reName{
+width:						8%;
+}
+table.reReplyListTable th.reContent{
+width:						70%;
+}
+table.reReplyListTable th.reDate{
+width:						14%;
+}
+table.reReplyListTable th.reRe{
+width:						8%;
+}
+
+
+
+#reCommentTable{
+width:						80%;
+margin:						0 auto 0 auto;
+font-size:					12px;
+}
+
+#reCommentTable td#coment{
+width:						87%;
+}
+
+#reCommentTable td#etc{
+width:						13%;
+}
+
+
+.inTableLinkText2{
+cursor : 					pointer;
+color:						orange;
+text-decoration:			none;
+text-shadow: 				1px 1px 2px black;
+font-weight:				600;
+}
+
+.inTableLinkText2:hover {
+color:						red;
+text-shadow: 				1px 1px 2px black;
+font-weight:				600;
+}
+
+.replyBtn:hover{
+cursor:						pointer;
+text-decoration:			underline;
+}
+
+
+.imgLinkText{
+cursor : 					pointer;
+font-family:				gulimche;
+font-size:					12px;
+color:						white;
+text-decoration:			none;
+}
+
+.underline{
+text-decoration:			underline overline;
+
+}
+
+/* 문의사항 글 작성 */
+.writeinqTitle{
+	font-family:				gulimche;
+	width:						98%;
+	height:						18px;
+	font-size:					12px;
+	border:						none;
+	resize: 					none;
+	color:						black;
+}
+
+.writeReplyContent{
+font-family:            gulimche;
+width:                  98%;
+height:                  40px;
+font-size:               12px;
+border:                  none;
+resize:                none;
+color:                  black;
+background:               white;
+}
